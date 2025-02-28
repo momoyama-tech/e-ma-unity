@@ -15,10 +15,10 @@ public class Player : MonoBehaviour
 
   void Update()
   {
-    Move();
+    UpdateMove();
   }
 
-  private void Move()
+  private void UpdateMove()
   {
     if (Input.GetKey(KeyCode.W))
     {

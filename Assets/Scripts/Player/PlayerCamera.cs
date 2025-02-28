@@ -2,28 +2,44 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private GameObject playerCameraRight;
-    [SerializeField] private GameObject playerCameraLeft;
-    [Range(-180, 180)] private float rotationX;
-    [Range(-180, 180)] private float rotationY;
-    [Range(0, 100)] private float height;
+    [SerializeField] private float speed;
+    [SerializeField] private bool isRight;
+    private int rotateDirection;
 
     void Start()
     {
-        
+        if(isRight)
+        {
+            rotateDirection = 1;
+        }
+        else
+        {
+            rotateDirection = -1;
+        }
     }
 
-    private void Initialize()
+    void Update()
     {
-        
+        UpdateRotate();
     }
 
-    private void InitializeCameraPos()
+    private void UpdateRotate()
     {
-    }
-
-    private void InitializeCameraRotate()
-    {
-        
+        if(Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Rotate(Vector3.right * speed * rotateDirection);
+        }
+        if(Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Rotate(Vector3.left * speed * rotateDirection);
+        }
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Rotate(Vector3.up * speed * rotateDirection);
+        }
+        if(Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Rotate(Vector3.down * speed * rotateDirection);
+        }
     }
 }
