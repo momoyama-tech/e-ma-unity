@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+  [SerializeField] private GameObject planet;
   [SerializeField] private float speed;
+  [SerializeField] private float gravity;
   private Rigidbody rb;
+  private Vector3 gravityDirection;
   void Start()
   {
     rb = GetComponent<Rigidbody>();
@@ -15,6 +18,7 @@ public class Player : MonoBehaviour
 
   void Update()
   {
+    ChangeGravity();
     UpdateMove();
   }
 
@@ -36,5 +40,11 @@ public class Player : MonoBehaviour
     {
       rb.AddForce(Vector3.right * speed);
     }
+  }
+
+  private void ChangeGravity()
+  {
+    gravityDirection = (planet.transform.position - transform.position).normalized;
+    rb.AddForce(gravityDirection * gravity);
   }
 }
