@@ -23,6 +23,9 @@ public class ActionCableClient : MonoBehaviour
         ws.OnMessage += (sender, e) =>
         {
             Debug.Log("WebSocket Data: " + e.Data);
+            // url属性のurlをInstantiateとかで表示する
+            // url属性がないとエラーを吐くので例外処理する
+        
         };
 
         ws.OnError += (sender, e) =>
@@ -86,7 +89,7 @@ public class ActionCableClient : MonoBehaviour
     private string GetWebSocketUrl()
     {
         #if UNITY_EDITOR
-                return "ws://localhost:3000/cable";  // 開発環境
+                return "wss://e-ma-rails-staging-986464278422.asia-northeast1.run.app/cable";  // 開発環境
         #else
                 return "wss://your-production-url.com/cable";  // 本番環境
         #endif
