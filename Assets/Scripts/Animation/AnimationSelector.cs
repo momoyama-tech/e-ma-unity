@@ -3,12 +3,14 @@ using UnityEngine;
 public class AnimationSelector : MonoBehaviour
 {
     private Animator animator;
-    [SerializeField] private int animationIndex;
+    private int animationIndex;
     [SerializeField] private RuntimeAnimatorController transformController;
     [SerializeField] private RuntimeAnimatorController rotationController;
 
     void Start()
     {
+        animationIndex = Random.Range(0, 2);
+
         animator = GetComponent<Animator>();
         if (animationIndex == 0)
         {
