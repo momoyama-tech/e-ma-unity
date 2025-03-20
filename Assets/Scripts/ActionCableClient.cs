@@ -11,8 +11,8 @@ public class ActionCableClient : MonoBehaviour
     private string roomId = "room_channel"; // 外部から設定するRoom ID
     private string channelName = "RoomChannel"; // ActionCableのチャンネル名
     private string wsUrl;
-    private Sprite flowerSprite;
-    [SerializeField] private GameObject flowerObject;
+    private string flowerUrl = null;
+
 
     [Serializable]
     public class Test
@@ -63,51 +63,8 @@ public class ActionCableClient : MonoBehaviour
                 Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
                 Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
                 Debug.Log(wsMessageJson["message"]["data"]["url"]);  // 画像の url
-
+                flowerUrl = (string)wsMessageJson["message"]["data"]["url"];
             }
-            //     try
-            //     {
-            //         Debug.Log("-----------------------1-----------------------");
-            // Debug.Log("WebSocket: " + e.Data);
-
-            //         if (!e.Data.Contains("url"))
-            //         {
-            //             Debug.Log("No url attribute");
-            //             Debug.Log("-----------------------2-----------------------");
-            //             return;
-            //         }
-
-            //         string[] parts = e.Data.Split(',');
-            //         if (parts.Length > 5)
-            //         {
-            //             string attributeAndValue = parts[5];
-            //             Debug.Log("Attribute and Value: " + attributeAndValue);
-
-            //             string[] urlParts = attributeAndValue.Split('"');
-            //             if (urlParts.Length > 3)
-            //             {
-            //                 string url = urlParts[3].Replace("\"", "");
-            //                 Debug.Log("URL: " + url);
-            //                 Debug.Log("-----------------------3-----------------------");
-
-            //                 StartCoroutine(GetTexture(url));
-            //                 Debug.Log("-----------------------5-----------------------");
-            //             }
-            //             else
-            //             {
-            //                 Debug.LogError("Unexpected attribute format: " + attributeAndValue);
-            //             }
-            //         }
-            //         else
-            //         {
-            //             Debug.LogError("Unexpected data format: " + e.Data);
-            //         }
-            //     }
-            //     catch (Exception ex)
-            //     {
-            //         Debug.LogError("Exception in OnMessage: " + ex.Message);
-            //         Debug.LogError("Stack Trace: " + ex.StackTrace);
-            //     }
         };
 
         ws.OnError += (sender, e) =>
@@ -177,28 +134,8 @@ public class ActionCableClient : MonoBehaviour
 #endif
     }
 
-    private IEnumerator GetTexture(string url)
+    public string GetFlowerUrl()
     {
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
-        Debug.Log("Connecting to: " + url);
-        Debug.Log("-----------------------4-----------------------");
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log("ImageLoadERROR:" + www.error);
-        }
-        else
-        {
-            // urlから取得した画像をSpriteに変換
-            flowerSprite = Sprite.Create(((DownloadHandlerTexture)www.downloadHandler).texture,
-             new Rect(0, 0, ((DownloadHandlerTexture)www.downloadHandler).texture.width,
-              ((DownloadHandlerTexture)www.downloadHandler).texture.height),
-               Vector2.zero);
-
-            flowerObject.GetComponent<SpriteRenderer>().sprite = flowerSprite;
-
-            Debug.Log("Success");
-        }
+        return flowerUrl;
     }
 }
