@@ -62,8 +62,8 @@ public class ActionCableClient : MonoBehaviour
             else {
                 Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
                 Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
-                Debug.Log(wsMessageJson["message"]["data"]["url"]);  // 画像の url
-                flowerUrl = (string)wsMessageJson["message"]["data"]["url"];
+                Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
+                flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
             }
         };
 
