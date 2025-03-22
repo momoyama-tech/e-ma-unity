@@ -4,8 +4,7 @@ public class AnimationSelector : MonoBehaviour
 {
     private Animator animator;
     private int animationIndex;
-    [SerializeField] private RuntimeAnimatorController transformController;
-    [SerializeField] private RuntimeAnimatorController rotationController;
+    [SerializeField] private RuntimeAnimatorController[] animationControllers;
 
     void Start()
     {
@@ -14,11 +13,11 @@ public class AnimationSelector : MonoBehaviour
         animator = GetComponent<Animator>();
         if (animationIndex == 0)
         {
-            animator.runtimeAnimatorController = transformController;
+            animator.runtimeAnimatorController = animationControllers[0];
         }
         else if (animationIndex == 1)
         {
-            animator.runtimeAnimatorController = rotationController;
+            animator.runtimeAnimatorController = animationControllers[1];
         }
     }
 
