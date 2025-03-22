@@ -6,19 +6,18 @@ public class FlowerObj : MonoBehaviour
 {
     [SerializeField] private int _totalStemNum;
     [SerializeField] private GameObject[] _flowerElements;
+    private GameObject _parentFlowerElement;
     private GameObject _selectedFlowerElement;
 
     private int _cotyledonNum = 1;
     private int _stemNum = 2;
     private int _bloomingNum = 3;
+
+    private bool _isCreated = false;
     void Start()
     {
+        _parentFlowerElement = this.gameObject;
         CreateFlowerElements().Forget();
-    }
-
-    void Update()
-    {
-
     }
 
     private void SelectFlowerElements(int num)
@@ -41,7 +40,7 @@ public class FlowerObj : MonoBehaviour
     {
         // 子葉を生成
         SelectFlowerElements(_cotyledonNum);
-        var cotyledon = Instantiate(_selectedFlowerElement);
+        var cotyledon = Instantiate(_selectedFlowerElement, _parentFlowerElement.transform);
         // cotyledonの大きさを変更
         cotyledon.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cotyledon.transform.DOScale(new Vector3(1f, 1f, 0.7f), 3f);
@@ -53,9 +52,10 @@ public class FlowerObj : MonoBehaviour
         for (int i = 0; i < _totalStemNum; i++)
         {
             SelectFlowerElements(_stemNum);
-            var stem = Instantiate(_selectedFlowerElement);
-            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * (i + 1), -0.01f * (i + 1));
+            var stem = Instantiate(_selectedFlowerElement, _parentFlowerElement.transform);
+            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * i, -0.01f * (i + 1));
             stem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            stem.transform.DOMoveY(5f * (i + 1), 2f);
             stem.transform.DOScale(new Vector3(1f, 1f, 0.7f), 2f);
             await UniTask.Delay(1000);
         }
@@ -68,5 +68,17 @@ public class FlowerObj : MonoBehaviour
         blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * (_totalStemNum + 1), -0.01f * (_totalStemNum + 1));
         blooming.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         blooming.transform.DOScale(new Vector3(1f, 1f, 1f), 5f);
+
+        await UniTask.Delay(2000);
+
+        // 不要なTweenを削除
+        DOTween.KillAll();
+
+        _isCreated = true;
+    }
+
+    public bool GetIsCreated()
+    {
+        return _isCreated;
     }
 }
