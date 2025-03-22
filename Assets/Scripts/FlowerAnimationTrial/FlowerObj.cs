@@ -70,7 +70,7 @@ public class FlowerObj : MonoBehaviour
         blooming.transform.DOMoveY(5f * (_totalStemNum + 1), 5f);
         blooming.transform.DOScale(new Vector3(1f, 1f, 1f), 5f);
 
-        await UniTask.Delay(2000);
+        await UniTask.Delay(5000);
 
         // 不要なTweenを削除
         DOTween.KillAll();
