@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 public class FlowerObjManager : MonoBehaviour
 {
@@ -8,27 +9,27 @@ public class FlowerObjManager : MonoBehaviour
     private GameObject flowerObjParent;
     private GameObject createdFlowerObj;
 
-    void Start()
+    async Task Start()
     {
         flowerObjParent = this.gameObject;
-        CreateFlowerObj();
+        await CreateFlowerObj();
+        Move();
     }
 
     void Update()
     {
-        if(flowerObj.GetComponent<FlowerObj>().GetIsCreated())
-        {
-            Move();
-        }
+
     }
 
-    private void CreateFlowerObj()
+    private async Task CreateFlowerObj()
     {
         createdFlowerObj = Instantiate(flowerObj, flowerObjParent.transform);
+        await createdFlowerObj.GetComponent<FlowerObj>().Instantiate();
     }
 
     private void Move()
     {
-        this.gameObject.transform.DOMove(new Vector3(5, 0, 0), 3f);
+        Debug.Log("Move");
+        this.gameObject.transform.DOMove(new Vector3(10, 0, 0), 3f);
     }
 }

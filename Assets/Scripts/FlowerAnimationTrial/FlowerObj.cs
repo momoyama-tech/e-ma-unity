@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 public class FlowerObj : MonoBehaviour
 {
@@ -13,11 +14,10 @@ public class FlowerObj : MonoBehaviour
     private int _stemNum = 2;
     private int _bloomingNum = 3;
 
-    private bool _isCreated = false;
-    void Start()
+    public async Task Instantiate()
     {
         _parentFlowerElement = this.gameObject;
-        CreateFlowerElements().Forget();
+        await CreateFlowerElements();
     }
 
     private void SelectFlowerElements(int num)
@@ -64,7 +64,7 @@ public class FlowerObj : MonoBehaviour
 
         // 花が咲く
         SelectFlowerElements(_bloomingNum);
-        var blooming = Instantiate(_selectedFlowerElement);
+        var blooming = Instantiate(_selectedFlowerElement, _parentFlowerElement.transform);
         blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * _totalStemNum, -0.01f * (_totalStemNum + 1));
         blooming.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         blooming.transform.DOMoveY(5f * (_totalStemNum + 1), 5f);
@@ -74,12 +74,5 @@ public class FlowerObj : MonoBehaviour
 
         // 不要なTweenを削除
         DOTween.KillAll();
-
-        _isCreated = true;
-    }
-
-    public bool GetIsCreated()
-    {
-        return _isCreated;
     }
 }
