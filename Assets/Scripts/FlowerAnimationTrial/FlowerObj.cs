@@ -65,8 +65,9 @@ public class FlowerObj : MonoBehaviour
         // 花が咲く
         SelectFlowerElements(_bloomingNum);
         var blooming = Instantiate(_selectedFlowerElement);
-        blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * (_totalStemNum + 1), -0.01f * (_totalStemNum + 1));
+        blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * _totalStemNum, -0.01f * (_totalStemNum + 1));
         blooming.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        blooming.transform.DOMoveY(5f * (_totalStemNum + 1), 5f);
         blooming.transform.DOScale(new Vector3(1f, 1f, 1f), 5f);
 
         await UniTask.Delay(2000);
