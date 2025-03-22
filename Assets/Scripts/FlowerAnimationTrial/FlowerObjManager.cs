@@ -29,7 +29,6 @@ public class FlowerObjManager : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log("Move");
         this.gameObject.transform.DOMove(new Vector3(10, 0, 0), 3f);
     }
 }
