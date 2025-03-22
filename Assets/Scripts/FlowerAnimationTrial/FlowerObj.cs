@@ -1,0 +1,72 @@
+using UnityEngine;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+
+public class FlowerObj : MonoBehaviour
+{
+    [SerializeField] private int _totalStemNum;
+    [SerializeField] private GameObject[] _flowerElements;
+    private GameObject _selectedFlowerElement;
+
+    private int _cotyledonNum = 1;
+    private int _stemNum = 2;
+    private int _bloomingNum = 3;
+    void Start()
+    {
+        CreateFlowerElements().Forget();
+    }
+
+    void Update()
+    {
+
+    }
+
+    private void SelectFlowerElements(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                _selectedFlowerElement = _flowerElements[0];
+                break;
+            case 2:
+                _selectedFlowerElement = _flowerElements[1];
+                break;
+            case 3:
+                _selectedFlowerElement = _flowerElements[2];
+                break;
+        }
+    }
+
+    private async UniTask CreateFlowerElements()
+    {
+        // 子葉を生成
+        SelectFlowerElements(_cotyledonNum);
+        var cotyledon = Instantiate(_selectedFlowerElement);
+        // cotyledonの大きさを変更
+        cotyledon.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        cotyledon.transform.DOScale(new Vector3(1f, 1f, 0.7f), 3f);
+
+        await UniTask.Delay(2000);
+
+        // 茎が伸びる
+        SelectFlowerElements(1);
+        for (int i = 0; i < _totalStemNum; i++)
+        {
+            SelectFlowerElements(_stemNum);
+            var stem = Instantiate(_selectedFlowerElement);
+            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * (i + 1), -0.01f * (i + 1));
+            stem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            stem.transform.DOScale(new Vector3(1f, 1f, 0.7f), 2f);
+            await UniTask.Delay(1000);
+        }
+
+        await UniTask.Delay(2000);
+
+        // 花が咲く
+        SelectFlowerElements(_bloomingNum);
+        var blooming = Instantiate(_selectedFlowerElement);
+        blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * (_totalStemNum + 1), -0.01f * (_totalStemNum + 1));
+        blooming.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        blooming.transform.DOScale(new Vector3(1f, 1f, 1f), 5f);
+    }
+}
