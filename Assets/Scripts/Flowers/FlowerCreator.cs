@@ -55,6 +55,7 @@ public class FlowerCreator : MonoBehaviour
         flower.transform.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
         // flowerの画像を_urlから取得して設定する
         StartCoroutine(SetFlowerImage(flower));
+        
     }
 
     /// <summary>
@@ -83,8 +84,9 @@ public class FlowerCreator : MonoBehaviour
             Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
             _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
             // flowerのSpriteRendererに設定する
-            flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
-
+            // flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
+            // flowerの子要素のBloomingオブジェクトのImageに設定する
+            flower.transform.Find("Blooming").GetComponent<Image>().sprite = _flowerSprite;
             Debug.Log("Success");
         }
     }

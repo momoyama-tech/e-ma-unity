@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c311057464945412ab6c98ee503ab2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerObj: {fileID: 7128823721597647580, guid: 95d3e915dcb3d435dbd52b668d972538, type: 3}
+  flowerObj: {fileID: 0}
 --- !u!114 &152129383
 MonoBehaviour:
   m_ObjectHideFlags: 0
