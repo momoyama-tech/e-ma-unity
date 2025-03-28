@@ -32,6 +32,7 @@ public class ButterFlyAnimation : MonoBehaviour
     private async Task Active()
     {
         Move();
+        SizeUp();
         // Flap();
     }
 
@@ -46,9 +47,16 @@ public class ButterFlyAnimation : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// 蝶の大きさを大きくする
+    /// 生成座標と目的座標の距離を計算
+    /// その距離と_lifeTimeを使って蝶の大きさを変更の終了時間を決定
+    /// </summary>
     private void SizeUp()
     {
-        transform.DOScale(_butterFlySize, 1f).SetEase(Ease.Linear).WaitForCompletion();
+        float distance = Vector3.Distance(_bornPos, _targetPos);
+        float sizeUpTime = distance / _lifeTime;
+        transform.DOScale(_butterFlySize, sizeUpTime).SetEase(Ease.Linear);
     }
     private async UniTask Flap()
     {

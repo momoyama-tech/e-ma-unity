@@ -644,7 +644,7 @@ Transform:
   m_GameObject: {fileID: 1523575160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.81, y: -2.43, z: -22.88}
+  m_LocalPosition: {x: -13.2, y: 5.7, z: -13.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -672,7 +672,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 446345871984619553, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5565137771076221350, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: m_Name
@@ -743,17 +743,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7242b525d546d419d986b4581b1432b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bornPosX: 5.81
-  _bornPosY: -2.43
-  _bornPosZ: -22.88
-  _targetPosX: -5
-  _targetPosY: 1.65
-  _targetPosZ: -24.11
-  _butterFlySize: 1
+  _bornPosX: 22.2
+  _bornPosY: -8.2
+  _bornPosZ: -2.4
+  _targetPosX: -13.2
+  _targetPosY: 5.7
+  _targetPosZ: -13.9
+  _butterFlySize: 10
   _flapHeight: 1
-  _flapDuration: 1
+  _lifeTime: 5
   _flapNumPerSecond: 1
-  _speed: 0.01
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
