@@ -13,9 +13,8 @@ public class ButterFlyAnimation : MonoBehaviour
     [SerializeField] private float _targetPosZ = 0;// 目的地Z
     [SerializeField] private float _butterFlySize = 1;// 蝶の大きさ
     [SerializeField] private float _flapHeight = 1;// 羽ばたく高さ
-    [SerializeField] private float _flapDuration = 0.5f;// 羽ばたく時間
+    [SerializeField] private float _lifeTime = 5;// 羽ばたく時間
     [SerializeField] private float _flapNumPerSecond = 1;// 1秒間に羽ばたく回数
-    [SerializeField] private float _speed = 0.1f;// 移動速度
 
     private Vector3 _bornPos;
     private Vector3 _targetPos;
@@ -27,16 +26,29 @@ public class ButterFlyAnimation : MonoBehaviour
         transform.position = _bornPos;
         transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         transform.DOScale(_butterFlySize, 1f).SetEase(Ease.Linear).WaitForCompletion();
-        // Move();
-        // await Flap();
+        Active();
+    }
+
+    private async Task Active()
+    {
+        Move();
+        // Flap();
     }
 
     private void Move()
     {
-        transform.DOMove(_targetPos, _speed).SetEase(Ease.Linear).OnComplete(() =>
+        // 目的地に向かって移動
+        transform.DOMove(_targetPos, _lifeTime).SetEase(Ease.Linear).OnComplete(() =>
         {
-            Destroy(gameObject);
+            Debug.Log("Arrived at the destination");
+            // 目的地に到達したら消滅
+            // Destroy(gameObject);
         });
+    }
+
+    private void SizeUp()
+    {
+        transform.DOScale(_butterFlySize, 1f).SetEase(Ease.Linear).WaitForCompletion();
     }
     private async UniTask Flap()
     {
@@ -46,12 +58,12 @@ public class ButterFlyAnimation : MonoBehaviour
             int randFlapNum = Random.Range(1, 3);
             for (int j = 0; j < randFlapNum; j++)
             {
-                transform.DOMoveY(_flapHeight, _flapDuration / 2).SetEase(Ease.Linear).OnComplete(() =>
+                transform.DOMoveY(_flapHeight, _lifeTime / 2).SetEase(Ease.Linear).OnComplete(() =>
                 {
-                transform.DOMoveY(0, _flapDuration / 2).SetEase(Ease.Linear);
+                transform.DOMoveY(0, _lifeTime / 2).SetEase(Ease.Linear);
                 });
             }
-            await UniTask.Delay((int)(_flapDuration * 1000 / _flapNumPerSecond));
+            await UniTask.Delay((int)(_lifeTime * 1000 / _flapNumPerSecond));
         }
     }
 }

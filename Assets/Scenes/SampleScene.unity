@@ -670,6 +670,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 446345871984619553, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5565137771076221350, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: m_Name
       value: SampleButterfly
@@ -749,7 +753,7 @@ MonoBehaviour:
   _flapHeight: 1
   _flapDuration: 1
   _flapNumPerSecond: 1
-  _speed: 0.1
+  _speed: 0.01
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
