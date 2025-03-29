@@ -1,13 +1,41 @@
 using UnityEngine;
 using WebSocketSharp;
 using System;
+using UnityEngine.Networking;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 
 public class ActionCableClient : MonoBehaviour
 {
     private WebSocket ws;
-    private string roomId  = "room_channel"; // 外部から設定するRoom ID
+    private string roomId = "room_channel"; // 外部から設定するRoom ID
     private string channelName = "RoomChannel"; // ActionCableのチャンネル名
     private string wsUrl;
+    private string flowerUrl = null;
+
+
+    [Serializable]
+    public class Test
+    {
+        [SerializeField] public string type;
+        [SerializeField] public Identifier identifier;
+
+        // public override string ToString() {
+        //     return $"type:{type}, identifier:{identifier}";
+        // }
+    }
+
+    [Serializable]
+    public class Identifier
+    {
+        [SerializeField] public string channel;
+        [SerializeField] public string room_id;
+        public override string ToString()
+        {
+            return $"channel:{channel}, room_id:{room_id}";
+        }
+    }
+
 
     void Start()
     {
@@ -22,7 +50,21 @@ public class ActionCableClient : MonoBehaviour
 
         ws.OnMessage += (sender, e) =>
         {
-            Debug.Log("WebSocket Data: " + e.Data);
+            JObject wsMessageJson = JObject.Parse(e.Data);
+            if ((String)wsMessageJson["type"] == "ping")
+            {
+                 // Debug.Log("this message is ping, so  through");
+            }
+            else if ((String)wsMessageJson["type"] == "confirm_subscription")
+            {
+                // Debug.Log("this message is confirm_subscription, so  through");
+            }
+            else {
+                Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
+                Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
+                Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
+                flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
+            }
         };
 
         ws.OnError += (sender, e) =>
@@ -85,10 +127,15 @@ public class ActionCableClient : MonoBehaviour
 
     private string GetWebSocketUrl()
     {
-        #if UNITY_EDITOR
-                return "ws://localhost:3000/cable";  // 開発環境
-        #else
-                return "wss://your-production-url.com/cable";  // 本番環境
-        #endif
+#if UNITY_EDITOR
+        return "wss://e-ma-rails-staging-986464278422.asia-northeast1.run.app/cable";  // 開発環境
+#else
+         return "wss://your-production-url.com/cable";  // 本番環境
+#endif
+    }
+
+    public string GetFlowerUrl()
+    {
+        return flowerUrl;
     }
 }
