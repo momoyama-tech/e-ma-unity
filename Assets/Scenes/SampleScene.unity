@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterflyRed (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1023006404968502684, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3712588943183144417, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15590137
@@ -635,6 +639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterflyRed (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1023006404968502684, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3712588943183144417, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15590137
@@ -863,6 +871,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterflyYellow
       objectReference: {fileID: 0}
+    - target: {fileID: 5565137771076221350, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _isMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _flapSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _flapHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _flapNumPerSecond
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8110110259109611995, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.15244436
@@ -925,9 +953,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterflyYellow (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5565137771076221350, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _isMove
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: _bornPosX
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: _bornPosY
@@ -935,7 +975,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: _bornPosZ
-      value: 10
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _isSizeUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _flapHeight
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _targetPosX
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _targetPosY
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _targetPosZ
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _butterFlySize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6153248977265911466, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: _flapNumPerSecond
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8110110259109611995, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: m_LocalPosition.x
@@ -998,6 +1066,10 @@ PrefabInstance:
     - target: {fileID: 1023006404968502684, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
       propertyPath: m_Name
       value: SampleButterflyRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023006404968502684, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3712588943183144417, guid: 32924beb9d9594b019460e21c02c9506, type: 3}
       propertyPath: m_LocalPosition.x

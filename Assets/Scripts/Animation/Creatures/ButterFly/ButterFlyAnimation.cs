@@ -87,6 +87,7 @@ public class ButterFlyAnimation : MonoBehaviour
     /// <returns></returns>.
     private async UniTask Flap()
     {
+        var sequence = DOTween.Sequence();
         if (_isFlap == false)
         {
             return;
@@ -99,12 +100,9 @@ public class ButterFlyAnimation : MonoBehaviour
             for (int j = 0; j < randFlapNum; j++)
             {
                 // なめらかな上下移動
-                await transform.DOMoveY(this.transform.position.y + _flapHeight, 1 / _flapSpeed)
-                    .SetEase(Ease.InOutSine) // なめらかな動き
-                    .AsyncWaitForCompletion();
-
-                await transform.DOMoveY(this.transform.position.y - _flapHeight, 1 / _flapSpeed)
-                    .SetEase(Ease.InOutSine) // なめらかな動き
+                await transform.DOLocalMoveY(_bornPos.y + _flapHeight, _flapSpeed)
+                    .SetLoops(-1, LoopType.Yoyo)
+                    .SetEase(Ease.Linear)
                     .AsyncWaitForCompletion();
             }
             await UniTask.Delay((int)(_lifeTime * 1000 / _flapNumPerSecond));
