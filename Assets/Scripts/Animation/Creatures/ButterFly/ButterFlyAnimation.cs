@@ -67,6 +67,7 @@ public class ButterFlyAnimation : MonoBehaviour
     {
         if (_isSizeUp == false)
         {
+            transform.localScale = new Vector3(_butterFlySize, _butterFlySize, _butterFlySize);
             return;
         }
         float distance = Vector3.Distance(_bornPos, _targetPos);
@@ -98,11 +99,11 @@ public class ButterFlyAnimation : MonoBehaviour
             for (int j = 0; j < randFlapNum; j++)
             {
                 // なめらかな上下移動
-                await transform.DOMoveY(this.transform.position.y + _flapHeight, _flapSpeed)
+                await transform.DOMoveY(this.transform.position.y + _flapHeight, 1 / _flapSpeed)
                     .SetEase(Ease.InOutSine) // なめらかな動き
                     .AsyncWaitForCompletion();
 
-                await transform.DOMoveY(this.transform.position.y - _flapHeight, _flapSpeed)
+                await transform.DOMoveY(this.transform.position.y - _flapHeight, 1 / _flapSpeed)
                     .SetEase(Ease.InOutSine) // なめらかな動き
                     .AsyncWaitForCompletion();
             }
