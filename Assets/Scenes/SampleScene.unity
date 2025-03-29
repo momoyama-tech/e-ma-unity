@@ -678,6 +678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterfly
       objectReference: {fileID: 0}
+    - target: {fileID: 5565137771076221350, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8110110259109611995, guid: a9fa6fee6a8ef4d61aa4712edc0bf089, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.004177528
@@ -750,9 +754,14 @@ MonoBehaviour:
   _targetPosY: 5.7
   _targetPosZ: -13.9
   _butterFlySize: 10
-  _flapHeight: 1
+  _flapHeight: 10
+  _flapSpeed: 1
   _lifeTime: 5
-  _flapNumPerSecond: 1
+  _flapNumPerSecond: 3
+  _isMove: 0
+  _isSizeUp: 1
+  _isFlap: 1
+  _isRotate: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
