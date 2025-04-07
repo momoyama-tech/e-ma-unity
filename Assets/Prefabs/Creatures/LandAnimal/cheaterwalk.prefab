@@ -154,15 +154,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -285.9
+      value: -123.05328
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -41.5
+      value: -21.316118
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3347,7 +3347,7 @@ PrefabInstance:
       addedObject: {fileID: 6499949191500249576}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7208384664535300505}
+      addedObject: {fileID: 7980065419761122742}
   m_SourcePrefab: {fileID: 100100000, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
 --- !u!1 &9004642202373264994 stripped
 GameObject:
@@ -3369,7 +3369,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!95 &7208384664535300505
+--- !u!95 &7980065419761122742
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
