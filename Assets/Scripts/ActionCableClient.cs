@@ -12,6 +12,8 @@ public class ActionCableClient : MonoBehaviour
     private string channelName = "RoomChannel"; // ActionCableのチャンネル名
     private string wsUrl;
     private string flowerUrl = null;
+    private string nameUrl = null;
+    private string wishUrl = null;
 
 
     [Serializable]
@@ -19,10 +21,6 @@ public class ActionCableClient : MonoBehaviour
     {
         [SerializeField] public string type;
         [SerializeField] public Identifier identifier;
-
-        // public override string ToString() {
-        //     return $"type:{type}, identifier:{identifier}";
-        // }
     }
 
     [Serializable]
@@ -64,6 +62,8 @@ public class ActionCableClient : MonoBehaviour
                 Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
                 Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
                 flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
+                nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
+                wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
             }
         };
 
@@ -137,5 +137,13 @@ public class ActionCableClient : MonoBehaviour
     public string GetFlowerUrl()
     {
         return flowerUrl;
+    }
+    public string GetNameUrl()
+    {
+        return nameUrl;
+    }
+    public string GetWishUrl()
+    {
+        return wishUrl;
     }
 }
