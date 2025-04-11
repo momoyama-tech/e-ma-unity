@@ -1138,34 +1138,13 @@ PrefabInstance:
       addedObject: {fileID: 956092771}
     - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 956092770}
-    - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 956092769}
-    - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 956092768}
   m_SourcePrefab: {fileID: 100100000, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
 --- !u!1 &956092767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
   m_PrefabInstance: {fileID: 956092766}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &956092768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956092767}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46dbc20e2ff0d4d9abed9e105806ac97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotationSpeed: 1
-  _rotationAngle: 300
-  _rotationNumPerSecond: 0.1
 --- !u!114 &956092769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,21 +1159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _butterFlySize: 10
   _finishTime: 1
---- !u!114 &956092770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956092767}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d9714b9f572477aac660daef33949a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flapHeight: 1
-  _flapSpeed: 1
-  _flapNumPerSecond: 1
 --- !u!114 &956092771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,6 +2031,10 @@ PrefabInstance:
     - target: {fileID: 27726300837356392, guid: c35c0164e1bc5453bbc795a10070669c, type: 3}
       propertyPath: m_Name
       value: horsewalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 27726300837356392, guid: c35c0164e1bc5453bbc795a10070669c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 804262248077392338, guid: c35c0164e1bc5453bbc795a10070669c, type: 3}
       propertyPath: m_LocalPosition.x
