@@ -708,7 +708,8 @@ PrefabInstance:
       propertyPath: _butterFlySize
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5258877717093925206, guid: 63e637386041c4a339e8fc0e39de02a9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3712588943183144417, guid: 63e637386041c4a339e8fc0e39de02a9, type: 3}
@@ -1087,15 +1088,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4356895933554372693, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 140
+      value: 155.4
       objectReference: {fileID: 0}
     - target: {fileID: 4356895933554372693, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.916187
+      value: 19.8
       objectReference: {fileID: 0}
     - target: {fileID: 4356895933554372693, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.26607
+      value: -17.4
       objectReference: {fileID: 0}
     - target: {fileID: 4356895933554372693, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1131,8 +1132,89 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4356895933554372693, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1821273825}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956092771}
+    - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956092770}
+    - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956092769}
+    - targetCorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956092768}
   m_SourcePrefab: {fileID: 100100000, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
+--- !u!1 &956092767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 126519542212689960, guid: 5fdd0ea4852c84a76a55fc8d32833f3d, type: 3}
+  m_PrefabInstance: {fileID: 956092766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &956092768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956092767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dbc20e2ff0d4d9abed9e105806ac97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 1
+  _rotationAngle: 300
+  _rotationNumPerSecond: 0.1
+--- !u!114 &956092769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956092767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25816c94184ee49a283c5880f0db2ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _butterFlySize: 10
+  _finishTime: 1
+--- !u!114 &956092770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956092767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d9714b9f572477aac660daef33949a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flapHeight: 1
+  _flapSpeed: 1
+  _flapNumPerSecond: 1
+--- !u!114 &956092771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956092767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713e93494a86947b0b2ea1ad864938e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bornPosX: 280
+  _bornPosY: 20
+  _bornPosZ: -18
+  _targetPosX: -200
+  _targetPosY: -20
+  _targetPosZ: -28
+  _moveSpeed: 100
+  _disappearPrefab: {fileID: 5452504893265981222, guid: ef43a6dffb9754884880656b3390bfe5, type: 3}
 --- !u!1 &979290044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,7 +2181,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 44.533
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6153248977265911466, guid: 2b2d9719b0bb9415d87a97ae48b673a2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8110110259109611995, guid: 2b2d9719b0bb9415d87a97ae48b673a2, type: 3}
