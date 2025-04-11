@@ -18,9 +18,12 @@ public class Disappearance : MonoBehaviour
     /// </summary>
     async UniTask Activate()
     {
-        transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        transform.localScale = new Vector3(0.5f, 0.5f, 1f);
 
-        await transform.DOScale(_disappearScale, _disappearTime).SetEase(Ease.Linear).AsyncWaitForCompletion();
+        // Z軸は1fで固定
+        // X軸とY軸を_disappearScaleの大きさまで小さくする
+        await transform.DOScale(new Vector3(_disappearScale, _disappearScale, 1f), _disappearTime)
+            .SetEase(Ease.Linear).AsyncWaitForCompletion();
 
         await transform.DOScale(0, 0.1f).SetEase(Ease.Linear).AsyncWaitForCompletion();
 

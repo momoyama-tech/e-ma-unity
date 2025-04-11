@@ -44,11 +44,12 @@ public class MoveManager : MonoBehaviour
         Disable();    
     }
 
-    private void Disable()
+    private async UniTask Disable()
     {
         // 目的地に到達したら消滅
         GameObject disappear = Instantiate(_disappearPrefab, transform.position, Quaternion.identity);
         disappear.transform.position = transform.position;
+        await transform.DOScale(0, 0.2f).SetEase(Ease.Linear).AsyncWaitForCompletion();
         this.gameObject.SetActive(false);
     }
 }
