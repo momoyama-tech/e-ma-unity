@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterflyPink
       objectReference: {fileID: 0}
+    - target: {fileID: 1878586238621966279, guid: a30ce3eda19e947f088ee3b32f961f29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2856871120737300410, guid: a30ce3eda19e947f088ee3b32f961f29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 220
@@ -635,6 +639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cheaterwalk
       objectReference: {fileID: 0}
+    - target: {fileID: 9004642202373264994, guid: 6d6d5792a31ac49dc8efc3b99949ce16, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -651,6 +659,10 @@ PrefabInstance:
     - target: {fileID: 1023006404968502684, guid: 63e637386041c4a339e8fc0e39de02a9, type: 3}
       propertyPath: m_Name
       value: SampleButterflyRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023006404968502684, guid: 63e637386041c4a339e8fc0e39de02a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3712588943183144417, guid: 63e637386041c4a339e8fc0e39de02a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1069,6 +1081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: catwalk
       objectReference: {fileID: 0}
+    - target: {fileID: 9073628418156990574, guid: c4ee0146e057d486db82da06cb6d70e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1158,7 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _butterFlySize: 10
-  _finishTime: 1
+  _finishTime: 8
 --- !u!114 &956092771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,7 +1193,7 @@ MonoBehaviour:
   _targetPosX: -200
   _targetPosY: -20
   _targetPosZ: -28
-  _moveSpeed: 100
+  _moveSpeed: 50
   _disappearPrefab: {fileID: 5452504893265981222, guid: ef43a6dffb9754884880656b3390bfe5, type: 3}
 --- !u!1 &979290044
 GameObject:
@@ -1480,6 +1496,10 @@ PrefabInstance:
     - target: {fileID: 7138938376008155360, guid: 153b93a9fbb7545b0981df70530e2ac4, type: 3}
       propertyPath: m_Name
       value: dogwalk
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138938376008155360, guid: 153b93a9fbb7545b0981df70530e2ac4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7519122474948008538, guid: 153b93a9fbb7545b0981df70530e2ac4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2097,6 +2117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SampleButterflyYellow
       objectReference: {fileID: 0}
+    - target: {fileID: 5565137771076221350, guid: 2b2d9719b0bb9415d87a97ae48b673a2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6153248977265911466, guid: 2b2d9719b0bb9415d87a97ae48b673a2, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2209,6 +2233,10 @@ PrefabInstance:
     - target: {fileID: 3632194834201632769, guid: 378399e44ed1742a8b57014dcc8aea2e, type: 3}
       propertyPath: m_Name
       value: SampleFlower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632194834201632769, guid: 378399e44ed1742a8b57014dcc8aea2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
