@@ -10,7 +10,7 @@ public class CreateController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V))
             this.gameObject.GetComponent<RandomButterflyCreator>().ManualUpdate();
     }
 }
