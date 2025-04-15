@@ -28,11 +28,28 @@ public class CreateController : MonoBehaviour
             ShowPrefab(2);
         if(Input.GetKeyDown(KeyCode.F))
             ShowPrefab(3);
+        if(Input.GetKeyDown(KeyCode.G))
+            ShowPrefab(4);
+        if(Input.GetKeyDown(KeyCode.H))
+            ShowPrefab(5);
+        if(Input.GetKeyDown(KeyCode.J))
+            ShowPrefab(6);
+        if(Input.GetKeyDown(KeyCode.K))
+            ShowPrefab(7);
+        if(Input.GetKeyDown(KeyCode.L))
+            ShowPrefab(8);
     }
 
     private void ShowPrefab(int index)
     {
         Debug.Log(_creators[index].name);
-        _creators[index].GetComponent<Creator>().Create();
+        try
+        {
+            _creators[index].GetComponent<Creator>().Create();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error creating prefab: {e.Message}");
+        }
     }
 }
