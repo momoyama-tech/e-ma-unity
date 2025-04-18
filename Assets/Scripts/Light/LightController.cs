@@ -4,6 +4,31 @@ public class LightController : MonoBehaviour
 {
     [SerializeField] private GameObject _downLights;
     [SerializeField] private GameObject _upLights;
+    [SerializeField] private GameObject _midiumLights;
+    List<GameObject> _downLightList = new List<GameObject>();
+    List<GameObject> _upLightList = new List<GameObject>();
+    List<GameObject> _midiumLightList = new List<GameObject>();
+
+    public void ManualStart()
+    {
+        // DownLightsの子オブジェクトを取得
+        foreach (Transform child in _downLights.transform)
+        {
+            _downLightList.Add(child.gameObject);
+        }
+
+        // UpLightsの子オブジェクトを取得
+        foreach (Transform child in _upLights.transform)
+        {
+            _upLightList.Add(child.gameObject);
+        }
+
+        // MidiumLightsの子オブジェクトを取得
+        foreach (Transform child in _midiumLights.transform)
+        {
+            _midiumLightList.Add(child.gameObject);
+        }
+    }
     public void ManualUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Z))
@@ -26,20 +51,20 @@ public class LightController : MonoBehaviour
             UpLightDown();
             Debug.Log("UpLightDown");
         }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            MidiumLightUp();
+            Debug.Log("MidiumLightUp");
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            MidiumLightDown();
+            Debug.Log("MidiumLightDown");
+        }
     }
     private void DownLightUp()
     {
-        // ライトの子オブジェクトを取得
-        List<GameObject> lights = new List<GameObject>();
-        // 全てのライトをオンにする
-        foreach (Transform child in _downLights.transform)
-        {
-            if (child.gameObject.activeSelf)
-            {
-                lights.Add(child.gameObject);
-            }
-        }
-        foreach (GameObject light in lights)
+        foreach (var light in _downLightList)
         {
             light.SetActive(true);
         }
@@ -47,17 +72,7 @@ public class LightController : MonoBehaviour
 
     private void DownLightDown()
     {
-        // ライトの子オブジェクトを取得
-        List<GameObject> lights = new List<GameObject>();
-        // 全てのライトをオフにする
-        foreach (Transform child in _downLights.transform)
-        {
-            if (child.gameObject.activeSelf)
-            {
-                lights.Add(child.gameObject);
-            }
-        }
-        foreach (GameObject light in lights)
+        foreach (var light in _downLightList)
         {
             light.SetActive(false);
         }
@@ -65,17 +80,7 @@ public class LightController : MonoBehaviour
 
     private void UpLightUp()
     {
-        // ライトの子オブジェクトを取得
-        List<GameObject> lights = new List<GameObject>();
-        // 全てのライトをオンにする
-        foreach (Transform child in _upLights.transform)
-        {
-            if (child.gameObject.activeSelf)
-            {
-                lights.Add(child.gameObject);
-            }
-        }
-        foreach (GameObject light in lights)
+        foreach (var light in _upLightList)
         {
             light.SetActive(true);
         }
@@ -83,17 +88,23 @@ public class LightController : MonoBehaviour
 
     private void UpLightDown()
     {
-        // ライトの子オブジェクトを取得
-        List<GameObject> lights = new List<GameObject>();
-        // 全てのライトをオフにする
-        foreach (Transform child in _upLights.transform)
+        foreach (var light in _upLightList)
         {
-            if (child.gameObject.activeSelf)
-            {
-                lights.Add(child.gameObject);
-            }
+            light.SetActive(false);
         }
-        foreach (GameObject light in lights)
+    }
+
+    private void MidiumLightUp()
+    {
+        foreach (var light in _midiumLightList)
+        {
+            light.SetActive(true);
+        }
+    }
+
+    private void MidiumLightDown()
+    {
+        foreach (var light in _midiumLightList)
         {
             light.SetActive(false);
         }

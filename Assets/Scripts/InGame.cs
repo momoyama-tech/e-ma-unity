@@ -17,6 +17,15 @@ public class InGame : MonoBehaviour
         {
             Debug.LogError("CreatorController is not assigned.");
         }
+
+        if (_lightController != null)
+        {
+            _lightController.GetComponent<LightController>().ManualStart();
+        }
+        else
+        {
+            Debug.LogError("LightController is not assigned.");
+        }
     }
 
     void Update()
@@ -30,6 +39,7 @@ public class InGame : MonoBehaviour
         {
             Debug.LogError("CreatorController is not assigned.");
         }
+        
         // LightControllerのManualUpdateメソッドを呼び出す
         if (_lightController != null)
         {
