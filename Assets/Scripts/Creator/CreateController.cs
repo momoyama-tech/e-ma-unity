@@ -3,7 +3,7 @@ using UnityEngine;
 public class CreateController : MonoBehaviour
 {
     private GameObject[] _creators;
-    void Start()
+    public void ManualStart()
     {
         // このオブジェクトの子オブジェクトを_creatorsに格納
         _creators = new GameObject[transform.childCount];
@@ -18,7 +18,7 @@ public class CreateController : MonoBehaviour
         }
     }
 
-    void Update()
+    public void ManualUpdate()
     {
         if(Input.GetKeyDown(KeyCode.A))
             ShowPrefab(0);
