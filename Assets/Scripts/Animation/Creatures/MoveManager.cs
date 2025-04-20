@@ -47,9 +47,18 @@ public class MoveManager : MonoBehaviour
     private async UniTask Disable()
     {
         // 目的地に到達したら消滅
-        GameObject disappear = Instantiate(_disappearPrefab, transform.position, Quaternion.identity);
-        disappear.transform.position = transform.position;
-        await transform.DOScale(0, 0.2f).SetEase(Ease.Linear).AsyncWaitForCompletion();
+        if(_disappearPrefab != null)
+        {
+            // 消失するPrefabを生成
+            GameObject disappear = Instantiate(_disappearPrefab, transform.position, Quaternion.identity);
+            disappear.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            disappear.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBack);
+
+            // 消失するPrefabのアニメーションが終わるまで待機
+            await disappear.transform.DOScale(new Vector3(0, 0, 0), 0.5f).SetEase(Ease.InBack).AsyncWaitForCompletion();
+        }
+        
+        await gameObject.transform.DOScale(new Vector3(0, 0, 0), 1.5f).SetEase(Ease.InBack).AsyncWaitForCompletion();
         this.gameObject.SetActive(false);
     }
 }
