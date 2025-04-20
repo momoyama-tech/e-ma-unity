@@ -3,6 +3,7 @@ using UnityEngine;
 public class InGame : MonoBehaviour
 {
     [SerializeField] private GameObject _creatorController;
+    [SerializeField] private GameObject _effectCreatorController;
     private GameObject _lightController;
 
     void Start()
@@ -26,6 +27,16 @@ public class InGame : MonoBehaviour
         {
             Debug.LogError("LightController is not assigned.");
         }
+
+        // EffectCreateControllerのManualStartメソッドを呼び出す
+        if (_effectCreatorController != null)
+        {
+            _effectCreatorController.GetComponent<EffectCreateController>().ManualStart();
+        }
+        else
+        {
+            Debug.LogError("EffectCreateController is not assigned.");
+        }
     }
 
     void Update()
@@ -48,6 +59,16 @@ public class InGame : MonoBehaviour
         else
         {
             Debug.LogError("LightController is not assigned.");
+        }
+
+        // EffectCreateControllerのManualUpdateメソッドを呼び出す
+        if (_effectCreatorController != null)
+        {
+            _effectCreatorController.GetComponent<EffectCreateController>().ManualUpdate();
+        }
+        else
+        {
+            Debug.LogError("EffectCreateController is not assigned.");
         }
     }
 }
