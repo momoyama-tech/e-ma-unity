@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 public class SampleFlowerObj : MonoBehaviour
 {
     [SerializeField] private int _totalStemNum;
-    [SerializeField] private GameObject[] _flowerElements;
     [SerializeField] private float _flowerScale = 1f;
+    [SerializeField] private GameObject[] _flowerElements;
     private GameObject _parentFlowerElement;
     private GameObject _selectedFlowerElement;
 
@@ -51,7 +51,7 @@ public class SampleFlowerObj : MonoBehaviour
         
         // cotyledonの大きさを変更
         cotyledon.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        cotyledon.transform.DOScale(new Vector3(1f, 1f, 0.7f), 3f);
+        cotyledon.transform.DOScale(new Vector3(1f * _flowerScale, 1f * _flowerScale, 0.7f * _flowerScale), 3f);
 
         await UniTask.Delay(2000);
 
@@ -66,10 +66,10 @@ public class SampleFlowerObj : MonoBehaviour
 
             // 生成位置を子葉の位置から少し上にずらす
             // 徐々に大きくしながらy軸方向に座標移動
-            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * i, -0.01f * (i + 1) * _flowerScale);
+            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * i  * _flowerScale, -0.01f * (i + 1));
             stem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             stem.transform.DOScale(new Vector3(1f * _flowerScale, 1f * _flowerScale, 0.7f * _flowerScale), 2f);
-            stem.transform.DOMoveY(5f * (i + 1), 2f);
+            stem.transform.DOMoveY(5f * (i + 1) * _flowerScale, 2f);
 
             await UniTask.Delay(1000);
         }
@@ -82,10 +82,10 @@ public class SampleFlowerObj : MonoBehaviour
 
         // 生成位置を茎の位置から少し上にずらす
         // 徐々に大きくしながらy軸方向に座標移動
-        blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * _totalStemNum, -0.01f * (_totalStemNum + 1)  * _flowerScale);
+        blooming.transform.position = cotyledon.transform.position + new Vector3(0, 5f * _totalStemNum * _flowerScale, -0.01f * (_totalStemNum + 1));
         blooming.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         blooming.transform.DOScale(new Vector3(1f * _flowerScale, 1f * _flowerScale, 1f * _flowerScale), 5f);
-        blooming.transform.DOMoveY(5f * (_totalStemNum + 1), 5f);
+        blooming.transform.DOMoveY(5f * (_totalStemNum + 1) * _flowerScale, 5f);
 
         await UniTask.Delay(5000);
 
