@@ -57,15 +57,11 @@ public class FlowerMove : MonoBehaviour
     private void OnEndPos()
     {
         Debugger.Log("移動完了01");
-        gameObject.SetActive(false);
         // 少し下に移動
         var sequance = DOTween.Sequence();
         sequance.Append(transform.DOMoveY(-100f, 1f).SetEase(Ease.Linear));
 
-        // オブジェクトを小さくして非表示
-        // 完了するまで待つ
-        sequance.Append(transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1f))
-        .OnComplete(() => gameObject.SetActive(false));
+        gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1f);
 
         // 同時に端まで移動
         sequance.Join(transform.DOMoveX(_centerPosX, _time).SetEase(Ease.Linear));
