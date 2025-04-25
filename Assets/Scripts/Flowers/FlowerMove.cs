@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
@@ -38,8 +39,9 @@ public class FlowerMove : MonoBehaviour
     {
         Debugger.Log("移動開始");
         // 右に移動
-         Debugger.Log(_speed.ToString());
-        await transform.DOMoveX(_endPosX, _endPosX/_speed).SetEase(Ease.Linear).OnComplete(OnEndPos).AsyncWaitForCompletion();
+        Debugger.Log(_speed.ToString());
+        Debugger.Log((_endPosX/_speed).ToString());
+        await transform.DOMoveX(_endPosX, Math.Abs(_endPosX/_speed)).SetEase(Ease.Linear).OnComplete(OnEndPos).AsyncWaitForCompletion();
     }
 
     private void OnEndPos()
