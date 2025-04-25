@@ -15,10 +15,11 @@ public class SampleFlowerObj : MonoBehaviour
     private int _stemNum = 2;
     private int _bloomingNum = 3;
 
-    public async Task Initialize()
+    public async UniTask Initialize()
     {
         _parentFlowerElement = this.gameObject;
         await CreateFlowerElements();
+        await gameObject.GetComponent<FlowerMove>().Initialize();
     }
 
     private void SelectFlowerElements(int num)

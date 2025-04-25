@@ -9,12 +9,12 @@ public class SampleFlowerCreator : MonoBehaviour
     private GameObject flowerObjParent;
     private GameObject createdFlowerObj;
 
-    public async Task ManualStart()
+    public async UniTask ManualStart()
     {
         flowerObjParent = this.gameObject;
     }
 
-    public async Task ManualUpdate()
+    public async UniTask ManualUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -22,7 +22,7 @@ public class SampleFlowerCreator : MonoBehaviour
         }
     }
 
-    private async Task CreateFlowerObj()
+    private async UniTask CreateFlowerObj()
     {
         createdFlowerObj = Instantiate(flowerObj, flowerObjParent.transform);
         await createdFlowerObj.GetComponent<SampleFlowerObj>().Initialize();
