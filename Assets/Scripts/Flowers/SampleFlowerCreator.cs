@@ -1,0 +1,30 @@
+using UnityEngine;
+using DG.Tweening;
+using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
+
+public class SampleFlowerCreator : MonoBehaviour
+{
+    [SerializeField] private GameObject flowerObj;
+    private GameObject flowerObjParent;
+    private GameObject createdFlowerObj;
+
+    public async Task ManualStart()
+    {
+        flowerObjParent = this.gameObject;
+    }
+
+    public async Task ManualUpdate()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            await CreateFlowerObj();
+        }
+    }
+
+    private async Task CreateFlowerObj()
+    {
+        createdFlowerObj = Instantiate(flowerObj, flowerObjParent.transform);
+        await createdFlowerObj.GetComponent<SampleFlowerObj>().Initialize();
+    }
+}
