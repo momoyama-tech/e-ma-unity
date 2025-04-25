@@ -64,7 +64,7 @@ public class FlowerMove : MonoBehaviour
 
         // オブジェクトを小さくして非表示
         // 完了するまで待つ
-        sequance.Append(transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1f));
+        sequance.Append(transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1f)).SetEase(Ease.Linear);
         gameObject.SetActive(false);
 
         // 同時に端まで移動
@@ -85,7 +85,7 @@ public class FlowerMove : MonoBehaviour
 
         // オブジェクトを大きくして表示
         // 完了するまで待つ
-        sequance.Append(transform.DOScale(new Vector3(1f, 1f, 1f), 1f));
+        sequance.Append(transform.DOScale(new Vector3(1f, 1f, 1f), 1f)).SetEase(Ease.Linear);
         gameObject.SetActive(true);
 
         // 同時に端まで移動
