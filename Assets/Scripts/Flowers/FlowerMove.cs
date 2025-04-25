@@ -61,7 +61,8 @@ public class FlowerMove : MonoBehaviour
         var sequance = DOTween.Sequence();
         sequance.Append(transform.DOMoveY(-100f, 1f).SetEase(Ease.Linear));
 
-        gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1f);
+        // オブジェクトを小さくする
+        gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 0.5f);
 
         // 同時に端まで移動
         sequance.Join(transform.DOMoveX(_centerPosX, _time).SetEase(Ease.Linear));
@@ -78,8 +79,7 @@ public class FlowerMove : MonoBehaviour
 
         var sequance = DOTween.Sequence();
 
-        // オブジェクトを大きくして表示
-        // 完了するまで待つ
+        // オブジェクトを大きくする
         gameObject.SetActive(true);
         gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
 
