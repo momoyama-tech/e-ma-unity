@@ -19,7 +19,7 @@ public class SampleFlowerObj : MonoBehaviour
     {
         _parentFlowerElement = this.gameObject;
         await CreateFlowerElements();
-        await gameObject.GetComponent<FlowerMove>().Initialize();
+        gameObject.GetComponent<FlowerMove>().Initialize();
     }
 
     private void SelectFlowerElements(int num)
