@@ -14,9 +14,18 @@ public class SampleFlowerObj : MonoBehaviour
     private int _cotyledonNum = 1;
     private int _stemNum = 2;
     private int _bloomingNum = 3;
+    private string _flowerUrl = "";// 画像のURL
+    private string _nameUrl = "";// 名前のURL
+    private string _wishUrl = "";// 願いのURL
+    private int _id = 0;
 
-    public async UniTask Initialize()
+    public async UniTask Initialize(string flowerUrl, string nameUrl, string wishUrl, int id)
     {
+        _flowerUrl = flowerUrl;
+        _nameUrl = nameUrl;
+        _wishUrl = wishUrl;
+        _id = id;
+
         _parentFlowerElement = this.gameObject;
         // await CreateFlowerElements();
         gameObject.GetComponent<FlowerMove>().Initialize();
@@ -92,5 +101,10 @@ public class SampleFlowerObj : MonoBehaviour
 
         // 不要なTweenを削除
         DOTween.KillAll();
+    }
+
+    public int GetId()
+    {
+        return _id;
     }
 }

@@ -12,6 +12,7 @@ public class FlowerMove : MonoBehaviour
     private float _time = 0f; // 横方向の移動時間
     private Vector3 _pos; // 開始位置
     private bool _isRotation = false; // 回転フラグ
+    private Vector3 _center; // 中心座標
 
     public async UniTask Initialize()
     {
@@ -20,21 +21,24 @@ public class FlowerMove : MonoBehaviour
         _time = Math.Abs(_endPosX / _speed);
         // 親コンポーネントを取得
         var parent = this.gameObject.transform.parent;
-        // 子コンポーネントの数が奇数なら_isOddNumber = trueにする
-        if (parent != null)
+        
+        if(gameObject.GetComponent<SampleFlowerObj>().GetId() % 2 == 0)
         {
-            int childCount = parent.childCount;
-            if (childCount % 2 == 1)
-            {
-                _isOddNumber = true;
-            }
+            _isOddNumber = true;
+        }
+        else
+        {
+            _isOddNumber = false;
         }
 
-        // 奇数番目なら座標を反転
-        if (_isOddNumber)
+        if(_isOddNumber)
         {
-            _endPosX *= -1f;
-            _centerPosX *= -1f;
+            _center = new Vector3(-200, 0, 0);
+            _endPosX *= -1;
+        }
+        else
+        {
+            _center = new Vector3(200, 0, 0);
         }
 
         Debugger.Log("初期化終了");
@@ -70,10 +74,7 @@ public class FlowerMove : MonoBehaviour
 
     private void Rotation()
     {
-        // 回転の中心をx=-200に設定
-        Vector3 center = new Vector3(-200f, 0f, 0f); // 楕円の中心を(-200, 0, 0)に設定
-
-        _pos = center; // 中心を基準に計算
+        _pos = _center; // 中心を基準に計算
         _pos.x += Mathf.Sin(Time.time * _speed) * 150f; // x軸方向の楕円運動
         _pos.y += Mathf.Cos(Time.time * _speed) * 100f; // y軸方向の楕円運動
         transform.position = _pos;

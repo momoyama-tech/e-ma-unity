@@ -28,7 +28,7 @@ public class SampleFlowerCreator : MonoBehaviour
             Debugger.Log("FlowerObjNumber " + i + " is created");
             _flowerObjList[i] = Instantiate(_flowerObj, this.gameObject.transform);
             _flowerObjList[i].transform.localPosition = new Vector3(0, 0, 0);
-            _flowerObjList[i].GetComponent<SampleFlowerObj>().Initialize();
+            _flowerObjList[i].GetComponent<SampleFlowerObj>().Initialize(null, null, null, i);
             // _flowerObjList[i].GetComponent<FlowerMove>().Initialize();
             await UniTask.Delay(2000);
         }
