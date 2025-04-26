@@ -58,7 +58,7 @@ public class SampleFlowerObj : MonoBehaviour
     ///  要素は小さい状態で生成して徐々に大きくしていく
     /// </summary>
     /// <returns></returns>
-    private async UniTask CreateFlowerElements()
+    private async UniTask CreateFlowerElements(Sprite sprite)
     {
         // 子葉を生成
         SelectFlowerElements(_cotyledonNum);// 生成するオブジェクトを子葉に変更
@@ -88,12 +88,13 @@ public class SampleFlowerObj : MonoBehaviour
 
             await UniTask.Delay(1000);
         }
-
         await UniTask.Delay(2000);
 
         // 花が咲く
         SelectFlowerElements(_bloomingNum);// 生成するオブジェクトを花に変更
         var blooming = Instantiate(_selectedFlowerElement, _parentFlowerElement.transform);// 花を生成
+
+        blooming.GetComponent<SpriteRenderer>().sprite = sprite;
 
         // 生成位置を茎の位置から少し上にずらす
         // 徐々に大きくしながらy軸方向に座標移動
@@ -116,82 +117,37 @@ public class SampleFlowerObj : MonoBehaviour
     private IEnumerator SetFlowerImage(GameObject flower)
     {
         // flowerの画像を_urlから取得して設定する
-        // Debug.Log("ImageLoadStart");
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(_flowerUrl);
         yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            // Debug.Log("ImageLoadERROR:" + www.error);
-        }
-        else
-        {
-            // _urlから取得した画像をSpriteに変換
-            Debug.Log("イラストwww: " + www);
-            Debug.Log("www.downloadHandler: " + www.downloadHandler);
-            Debug.Log("www.downloadHandler.texture: " + ((DownloadHandlerTexture)www.downloadHandler).texture);
-
-            Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
-            _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-            // flowerのSpriteRendererに設定する
-            flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
-
-            // Debug.Log("Success");
-        }
+        Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        // flowerのSpriteRendererに設定する
+        flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
     }
 
     private IEnumerator SetNameImage(GameObject flower)
     {
         // flowerの名前を_urlから取得して設定する
-        // Debug.Log("NameLoadStart");
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(_nameUrl);
         yield return www.SendWebRequest();
 
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            // Debug.Log("NameLoadERROR:" + www.error);
-        }
-        else
-        {
-            // _urlから取得した画像をSpriteに変換
-            Debug.Log("名前www: " + www);
-            Debug.Log("www.downloadHandler: " + www.downloadHandler);
-            Debug.Log("www.downloadHandler.texture: " + ((DownloadHandlerTexture)www.downloadHandler).texture);
-
-            Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
-            _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-            // flowerのSpriteRendererに設定する
-            flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
-
-            // Debug.Log("Success");
-        }
+        // _urlから取得した画像をSpriteに変換
+        Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        // flowerのSpriteRendererに設定する
+        flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
     }
 
     private IEnumerator SetWishImage(GameObject flower)
     {
         // flowerの願いを_urlから取得して設定する
-        // Debug.Log("WishLoadStart");
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(_wishUrl);
         yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            // Debug.Log("WishLoadERROR:" + www.error);
-        }
-        else
-        {
-            // _urlから取得した画像をSpriteに変換
-            Debug.Log("願い事www: " + www);
-            Debug.Log("www.downloadHandler: " + www.downloadHandler);
-            Debug.Log("www.downloadHandler.texture: " + ((DownloadHandlerTexture)www.downloadHandler).texture);
-
-            Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
-            _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-            // flowerのSpriteRendererに設定する
-            flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
-
-            // Debug.Log("Success");
-        }
+        // _urlから取得した画像をSpriteに変換
+        Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        // flowerのSpriteRendererに設定する
+        flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
     }
 
     public void SetFlowerInfo(string flowerUrl, string nameUrl, string wishUrl)
@@ -200,6 +156,7 @@ public class SampleFlowerObj : MonoBehaviour
         _flowerUrl = flowerUrl;
         _nameUrl = nameUrl;
         _wishUrl = wishUrl;
+
         // 花の要素を生成
         StartCoroutine(SetFlowerImage(gameObject));
         StartCoroutine(SetNameImage(gameObject.transform.Find("Name").gameObject));

@@ -52,6 +52,10 @@ public class SampleFlowerCreator : MonoBehaviour
 
     public void SetFlowerInfo(string flowerUrl, string nameUrl, string wishUrl)
     {
+        if(_completeFlowerListNum >= _flowerObjNum)
+        {
+            _completeFlowerListNum = 0;
+        }
         _flowerObjList[_completeFlowerListNum].GetComponent<SampleFlowerObj>().SetFlowerInfo(flowerUrl, nameUrl, wishUrl);
         _completeFlowerListNum++;
     }

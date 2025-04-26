@@ -73,7 +73,6 @@ public class ActionCableClient : MonoBehaviour
                 Debug.Log("wishUrl: " + wishUrl);
                 Debug.Log("上の情報から花を作る");
 
-
                 try
                 {
                     Debug.Log(_flowerCreator.GetComponent<SampleFlowerCreator>());
@@ -82,8 +81,6 @@ public class ActionCableClient : MonoBehaviour
                 {
                     Debug.Log(ee);
                 }
-
-                // _flowerCreator.GetComponent<SampleFlowerCreator>().SetFlowerInfo(flowerUrl, nameUrl, wishUrl);
             }
         };
 
