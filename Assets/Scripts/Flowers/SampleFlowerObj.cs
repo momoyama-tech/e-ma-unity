@@ -5,23 +5,34 @@ using System.Threading.Tasks;
 
 public class SampleFlowerObj : MonoBehaviour
 {
-    [SerializeField] private int _totalStemNum;
-    [SerializeField] private float _flowerScale = 1f;
-    [SerializeField] private GameObject[] _flowerElements;
+    [SerializeField] private int _totalStemNum;// 茎画像の数
+    [SerializeField] private float _flowerScale = 1f;// // 花の大きさ
+    [SerializeField] private GameObject[] _flowerElements;// 花の要素(子葉の方から0番目)
     private GameObject _parentFlowerElement;
     private GameObject _selectedFlowerElement;
-
+    private string _flowerUrl = "";// 画像のURL
+    private string _nameUrl = "";// 名前のURL
+    private string _wishUrl = "";// 願いのURL
     private int _cotyledonNum = 1;
     private int _stemNum = 2;
     private int _bloomingNum = 3;
+    private int _id = 0;
 
-    public async UniTask Initialize()
+    public async UniTask Initialize(string flowerUrl, string nameUrl, string wishUrl, int id)
     {
+        _flowerUrl = flowerUrl;
+        _nameUrl = nameUrl;
+        _wishUrl = wishUrl;
+        _id = id;
+
         _parentFlowerElement = this.gameObject;
-        await CreateFlowerElements();
         gameObject.GetComponent<FlowerMove>().Initialize();
     }
 
+    /// <summary>
+    /// 花要素のどれを生成するか決定
+    /// </summary>
+    /// <param name="num"></param>
     private void SelectFlowerElements(int num)
     {
         switch (num)
@@ -92,5 +103,10 @@ public class SampleFlowerObj : MonoBehaviour
 
         // 不要なTweenを削除
         DOTween.KillAll();
+    }
+
+    public int GetId()
+    {
+        return _id;
     }
 }

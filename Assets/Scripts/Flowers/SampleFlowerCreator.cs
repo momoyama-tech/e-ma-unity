@@ -1,30 +1,51 @@
 using UnityEngine;
+using System.Collections.Generic;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 
 public class SampleFlowerCreator : MonoBehaviour
 {
-    [SerializeField] private GameObject flowerObj;
-    private GameObject flowerObjParent;
-    private GameObject createdFlowerObj;
-
+    private GameObject[] _flowerObjList;// / 花オブジェクトのリスト
+    [SerializeField] private GameObject _flowerObj;// / 花オブジェクト
+    [SerializeField] private int _flowerObjNum = 26;// リストに格納する花の数
+    private bool _isStarted = false;// Updateを呼ぶかどうかのフラグ
     public async UniTask ManualStart()
     {
-        flowerObjParent = this.gameObject;
-    }
-
-    public async UniTask ManualUpdate()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
+        // フラワーオブジェクトがnullかどうかを判定
+        if (_flowerObj == null)
         {
-            await CreateFlowerObj();
+            Debug.LogError("Error: _flowerObj is not assigned in the inspector.");
+            return;
         }
+        else
+        {
+            Debug.Log("FlowerObj is assigned in the inspector.");
+        }
+
+        // フラワーオブジェクトのリストを初期化
+        // リストにテンプレを格納
+        _flowerObjList = new GameObject[_flowerObjNum];
+        for (int i = 0; i < _flowerObjNum; i++)
+        {
+            Debugger.Log("FlowerObjNumber " + i + " is created");
+            _flowerObjList[i] = Instantiate(_flowerObj, this.gameObject.transform);
+            _flowerObjList[i].transform.localPosition = new Vector3(0, 0, 0);
+            _flowerObjList[i].GetComponent<SampleFlowerObj>().Initialize(null, null, null, i);
+            // _flowerObjList[i].GetComponent<FlowerMove>().Initialize();
+            await UniTask.Delay(100);
+        }
+        _isStarted = true;
     }
 
-    private async UniTask CreateFlowerObj()
+    public void ManualUpdate()
     {
-        createdFlowerObj = Instantiate(flowerObj, flowerObjParent.transform);
-        await createdFlowerObj.GetComponent<SampleFlowerObj>().Initialize();
+        if (_isStarted)
+        {
+            foreach (var flowerObj in _flowerObjList)
+            {
+                flowerObj.GetComponent<FlowerMove>().ManualUpdate();
+            }
+        }
     }
 }

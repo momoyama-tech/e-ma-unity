@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 public class LightController : MonoBehaviour
 {
-    [SerializeField] private GameObject _downLights;
-    [SerializeField] private GameObject _upLights;
-    [SerializeField] private GameObject _midiumLights;
+    [SerializeField] private GameObject _downLights;// 下からのライト
+    [SerializeField] private GameObject _upLights;// 上からのライト
+    [SerializeField] private GameObject _midiumLights;// 正面からのライト
     List<GameObject> _downLightList = new List<GameObject>();
     List<GameObject> _upLightList = new List<GameObject>();
     List<GameObject> _midiumLightList = new List<GameObject>();
