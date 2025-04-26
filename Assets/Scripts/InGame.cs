@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class InGame : MonoBehaviour
 {
     [SerializeField] private SampleFlowerCreator _flowerCreator;

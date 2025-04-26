@@ -1,24 +1,25 @@
 using UnityEngine;
 using System;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
 
 public class FlowerMove : MonoBehaviour
 {
     [SerializeField] private float _speed; // 移動速度
     private float _endPosX = 400.0f; // 端の座標
-    private float _centerPosX = 50.0f;// 中央の座標
+    private float _centerPosX = 50.0f; // 中央の座標
     private bool _isOddNumber = false;
-    private float _time = 0f;// 横方向の移動時間
+    private float _time = 0f; // 横方向の移動時間
 
     public void Initialize()
     {
         Debugger.Log(_speed.ToString());
         // 移動時間を計算
-        _time = Math.Abs(_endPosX/_speed);
+        _time = Math.Abs(_endPosX / _speed);
         // 親コンポーネントを取得
         var parent = this.gameObject.transform.parent;
         // 子コンポーネントの数が奇数なら_isOddNumber = trueにする
-        if(parent != null)
+        if (parent != null)
         {
             int childCount = parent.childCount;
             if (childCount % 2 == 1)
@@ -28,7 +29,7 @@ public class FlowerMove : MonoBehaviour
         }
 
         // 奇数番目なら座標を反転
-        if(_isOddNumber)
+        if (_isOddNumber)
         {
             _endPosX *= -1f;
             _centerPosX *= -1f;
@@ -47,48 +48,45 @@ public class FlowerMove : MonoBehaviour
         Debugger.Log("移動開始");
         // 右に移動
         Debugger.Log(_speed.ToString());
-        Debugger.Log((_endPosX/_speed).ToString());
-        transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).OnComplete(OnEndPos);
+        Debugger.Log((_endPosX / _speed).ToString());
+        transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).OnComplete(() => OnEndPos().Forget());
     }
 
     /// <summary>
     /// 2週目以降、回転移動アニメーションの下半分
     /// </summary>
-    private void OnEndPos()
+    private async UniTask OnEndPos()
     {
         Debugger.Log("移動完了01");
         // 少し下に移動
-        var sequance = DOTween.Sequence();
-        sequance.Append(transform.DOMoveY(-100f, 1f).SetEase(Ease.Linear));
+        await gameObject.transform.DOMoveY(-100f, 1f).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
         // オブジェクトを小さくする
-        gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 0.5f);
+        await gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 0.5f).AsyncWaitForCompletion();
 
         // 同時に端まで移動
-        sequance.Join(transform.DOMoveX(_centerPosX, _time).SetEase(Ease.Linear));
-        sequance.OnComplete(OnCenterPos);
-        sequance.Play();
+        await gameObject.transform.DOMoveX(_centerPosX, 1f).AsyncWaitForCompletion();
+
+        OnCenterPos().Forget();
     }
 
     /// <summary>
     /// 3週目以降、回転移動アニメーションの上半分
     /// </summary>
-    private void OnCenterPos()
+    private async UniTask OnCenterPos()
     {
         Debugger.Log("移動完了02");
 
-        var sequance = DOTween.Sequence();
-
         // オブジェクトを大きくする
         gameObject.SetActive(true);
-        gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 1f);
+        await gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).AsyncWaitForCompletion();
 
         // 少し上に移動
-        sequance.Append(transform.DOMoveY(100f, 1f).SetEase(Ease.Linear));
+        await gameObject.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
         // 同時に端まで移動
-        sequance.Join(transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear));
-        sequance.OnComplete(OnEndPos);
-        sequance.Play();
+        await gameObject.transform.DOMoveX(_endPosX, 1f).AsyncWaitForCompletion();
+
+        OnEndPos().Forget();
     }
 }
