@@ -20,6 +20,7 @@ public class SampleReborn : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             _animals[i] = transform.GetChild(i).gameObject;
+            _animals[i].GetComponent<Animal>().Initialize(_goalPosX);
             _animals[i].SetActive(false);
         }
         // 初期化処理
