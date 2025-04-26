@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class SampleReborn : MonoBehaviour
 {
-    [SerializeField] GameObject[] _animals;// 動物のPrefab
+    GameObject[] _animals;// 動物のPrefab
     [SerializeField] private float _rebirthPosX = -400f; // 再生位置X
     [SerializeField] private float _rebirthPosY = -60f; // 再生位置Y
     [SerializeField] private float _rebirthPosZ = -20f; // 再生位置Z
@@ -15,21 +15,23 @@ public class SampleReborn : MonoBehaviour
 
     public void ManualStart()
     {
-        foreach(var animal in _animals)
+        // このオブジェクトの子要素を全て_animalsに格納
+        _animals = new GameObject[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++)
         {
-            Instantiate(animal);
-            animal.SetActive(false);
+            _animals[i] = transform.GetChild(i).gameObject;
+            _animals[i].SetActive(false);
         }
         // 初期化処理
-        if(_isRightSide)
+        if (_isRightSide)
         {
-            _rebirthPos = new Vector3(_rebirthPosX, _rebirthPosY, _rebirthPosZ);
-            _rebirthRotation = new Vector3(0, 180, 0);
+            _rebirthPos = new Vector3(-_rebirthPosX, _rebirthPosY, _rebirthPosZ);
+            _rebirthRotation = new Vector3(0, -90, 0);
         }
         else
         {
-            _rebirthPos = new Vector3(-_rebirthPosX, _rebirthPosY, _rebirthPosZ);
-            _rebirthRotation = new Vector3(0, 0, 0);
+            _rebirthPos = new Vector3(_rebirthPosX, _rebirthPosY, _rebirthPosZ);
+            _rebirthRotation = new Vector3(0, 90, 0);
         }
     }
 
@@ -40,31 +42,22 @@ public class SampleReborn : MonoBehaviour
             Reborn();
             Debug.Log("Reborn");
         }
-    }
 
-    private GameObject SelectAnimal(int randNum)
-    {
-        if(randNum < 0 || randNum >= _animals.Length)
+        foreach (var animal in _animals)
         {
-            Debug.LogError("Error: randNum is out of range.");
-            return null;
+            animal.GetComponent<Animal>().ManualUpdate();
         }
-        return _animals[randNum];
     }
-
     private void Reborn()
     {
+
         // ランダムに動物を選択
         int randNum = Random.Range(0, _animals.Length);
-        GameObject selectedAnimal = SelectAnimal(randNum);
 
-        if (selectedAnimal != null)
-        {
-            selectedAnimal.SetActive(true);
-            selectedAnimal.transform.position = _rebirthPos;
-            selectedAnimal.transform.rotation = Quaternion.Euler(_rebirthRotation);
-            selectedAnimal.transform.DOMove(new Vector3(_goalPosX, _rebirthPosY, _rebirthPosZ), 1f)
-                .SetEase(Ease.Linear);
-        }
+        // _animalsのrandNum番目の動物を表示
+        _animals[randNum].SetActive(true);
+        _animals[randNum].transform.position = _rebirthPos;
+        _animals[randNum].transform.rotation = Quaternion.Euler(_rebirthRotation);
+        _animals[randNum].transform.DOMoveX(_goalPosX, 5f);
     }
 }
