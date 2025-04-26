@@ -15,7 +15,8 @@ public class SampleFlowerCreator : MonoBehaviour
         {
             Debug.LogError("Error: _flowerObj is not assigned in the inspector.");
             return;
-        }else
+        }
+        else
         {
             Debug.Log("FlowerObj is assigned in the inspector.");
         }
@@ -33,11 +34,11 @@ public class SampleFlowerCreator : MonoBehaviour
         }
     }
 
-    public async UniTask ManualUpdate()
+    public void ManualUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        foreach (var flowerObj in _flowerObjList)
         {
-            Debugger.Log("Space key pressed");
+            flowerObj.GetComponent<FlowerMove>().ManualUpdate();
         }
     }
 }

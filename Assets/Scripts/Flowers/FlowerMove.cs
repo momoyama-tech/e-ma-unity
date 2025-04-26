@@ -10,8 +10,10 @@ public class FlowerMove : MonoBehaviour
     private float _centerPosX = 50.0f; // 中央の座標
     private bool _isOddNumber = false;
     private float _time = 0f; // 横方向の移動時間
+    private Vector3 _pos; // 開始位置
+    private bool _isRotation = false; // 回転フラグ
 
-    public void Initialize()
+    public async UniTask Initialize()
     {
         Debugger.Log(_speed.ToString());
         // 移動時間を計算
@@ -37,68 +39,39 @@ public class FlowerMove : MonoBehaviour
 
         Debugger.Log("初期化終了");
 
-        Move();
+        await Move();
+        Debugger.Log("移動完了03");
+    }
+
+    public void ManualUpdate()
+    {
+        Debugger.Log("ManualUpdate");
+        if(_isRotation)
+        {
+            Debugger.Log("回転開始");
+            Rotation();
+        }
     }
 
     /// <summary>
     /// 1周目の単純横方向移動
     /// </summary>
-    private void Move()
+    private async UniTask Move()
     {
         Debugger.Log("移動開始");
         // 右に移動
         Debugger.Log(_speed.ToString());
         Debugger.Log((_endPosX / _speed).ToString());
-        transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).OnComplete(Rotation);
+        await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
+        _speed = _speed * 0.01f;
+        _isRotation = true;
     }
 
     private void Rotation()
     {
-        float speed = 2.0f;
-        GameObject target = this.gameObject;
-        Transform myTransform = target.transform;
-        Vector3 pos = myTransform.position;
- 
-        pos.x = Mathf.Sin(Time.time * speed) * 150f;
-        pos.y = Mathf.Cos(Time.time * speed) * 100f;
-        myTransform.position = pos;
-    }
-
-    /// <summary>
-    /// 2週目以降、回転移動アニメーションの下半分
-    /// </summary>
-    private async UniTask OnEndPos()
-    {
-        Debugger.Log("移動完了01");
-        // 少し下に移動
-        await gameObject.transform.DOMoveY(-100f, 1f).SetEase(Ease.Linear).AsyncWaitForCompletion();
-
-        // オブジェクトを小さくする
-        await gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 0.5f).AsyncWaitForCompletion();
-
-        // 同時に端まで移動
-        await gameObject.transform.DOMoveX(_centerPosX, 1f).AsyncWaitForCompletion();
-
-        OnCenterPos().Forget();
-    }
-
-    /// <summary>
-    /// 3週目以降、回転移動アニメーションの上半分
-    /// </summary>
-    private async UniTask OnCenterPos()
-    {
-        Debugger.Log("移動完了02");
-
-        // オブジェクトを大きくする
-        gameObject.SetActive(true);
-        await gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).AsyncWaitForCompletion();
-
-        // 少し上に移動
-        await gameObject.transform.DOMoveY(0f, 1f).SetEase(Ease.Linear).AsyncWaitForCompletion();
-
-        // 同時に端まで移動
-        await gameObject.transform.DOMoveX(_endPosX, 1f).AsyncWaitForCompletion();
-
-        OnEndPos().Forget();
+        _pos = transform.position;
+        _pos.x = Mathf.Sin(Time.time * _speed) * 150f;
+        _pos.y = Mathf.Cos(Time.time * _speed) * 100f;
+        transform.position = _pos;
     }
 }
