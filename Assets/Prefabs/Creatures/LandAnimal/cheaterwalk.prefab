@@ -2244,6 +2244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cheaterwalk
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1143186877062297447, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.00009963938
@@ -3348,6 +3352,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7980065419761122742}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -9104184074211739870}
   m_SourcePrefab: {fileID: 100100000, guid: 292d73bf60d004178a89c6993eef15d4, type: 3}
 --- !u!1 &9004642202373264994 stripped
 GameObject:
@@ -3390,3 +3397,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-9104184074211739870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9004642202373264994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121673c10d7f947ac9ec3878dab8d6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

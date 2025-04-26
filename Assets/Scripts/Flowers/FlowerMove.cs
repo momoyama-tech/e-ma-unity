@@ -52,7 +52,7 @@ public class FlowerMove : MonoBehaviour
 
     public void ManualUpdate()
     {
-        Debugger.Log("ManualUpdate");
+        // Debugger.Log("ManualUpdate");
         if(_isRotation)
         {
             Debugger.Log("回転開始");
