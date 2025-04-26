@@ -8,8 +8,10 @@ public class Disappearance : MonoBehaviour
     [SerializeField] private float _disappearTime = 1f; // 消えるまでの時間
     [SerializeField] private float _disappearScale = 0.01f; // 大きさ
 
-    void Start()
+    public void Initialize(Vector3 pos)
     {
+        // 位置を設定
+        transform.position = pos;
         gameObject.SetActive(true);
         Activate();
     }
@@ -26,7 +28,7 @@ public class Disappearance : MonoBehaviour
         await transform.DOScale(new Vector3(_disappearScale, _disappearScale, 1f), _disappearTime)
             .SetEase(Ease.Linear).AsyncWaitForCompletion();
 
-        await transform.DOScale(0, 0.1f).SetEase(Ease.Linear).AsyncWaitForCompletion();
+        await transform.DOScale(0, 0.5f).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
         gameObject.SetActive(false);
     }

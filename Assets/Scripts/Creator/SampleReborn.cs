@@ -17,7 +17,7 @@ public class SampleReborn : MonoBehaviour
     {
         // このオブジェクトの子要素を全て_animalsに格納
         _animals = new GameObject[transform.childCount];
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount - 1; i++)
         {
             _animals[i] = transform.GetChild(i).gameObject;
             _animals[i].GetComponent<Animal>().Initialize(_goalPosX);
@@ -49,7 +49,7 @@ public class SampleReborn : MonoBehaviour
     {
 
         // ランダムに動物を選択
-        int randNum = Random.Range(0, _animals.Length);
+        int randNum = Random.Range(0, _animals.Length - 1);
 
         // _animalsのrandNum番目の動物を表示
         _animals[randNum].SetActive(true);
