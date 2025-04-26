@@ -28,7 +28,6 @@ public class SampleFlowerCreator : MonoBehaviour
             Debugger.Log("FlowerObjNumber " + i + " is created");
             _flowerObjList[i] = Instantiate(_flowerObj, this.gameObject.transform);
             _flowerObjList[i].transform.localPosition = new Vector3(0, 0, 0);
-            _flowerObjList[i].transform.localScale = new Vector3(1f, 1f, 1f);
             _flowerObjList[i].GetComponent<SampleFlowerObj>().Initialize();
             // _flowerObjList[i].GetComponent<FlowerMove>().Initialize();
             await UniTask.Delay(2000);
@@ -40,34 +39,9 @@ public class SampleFlowerCreator : MonoBehaviour
     {
         if (_isStarted)
         {
-            if (_flowerObjList == null || _flowerObjList.Length == 0)
-            {
-                Debug.LogError("Error: _flowerObjList is not initialized or empty.");
-                return;
-            }
-
-            var i = 0;
-
             foreach (var flowerObj in _flowerObjList)
             {
-                if (flowerObj == null)
-                {
-                    Debug.LogError("Error: One of the flower objects in _flowerObjList is null.");
-                    Debugger.Log($"Flower object {i} is null.");
-                    continue;
-                }
-
-                var flowerMove = flowerObj.GetComponent<FlowerMove>();
-                if (flowerMove == null)
-                {
-                    Debug.LogError($"Error: FlowerMove component is missing on {flowerObj.name}.");
-                    continue;
-                }
-
-                Debugger.Log("ManualUpdate Success");
-
-                flowerMove.ManualUpdate();
-                i++;
+                flowerObj.GetComponent<FlowerMove>().ManualUpdate();
             }
         }
     }

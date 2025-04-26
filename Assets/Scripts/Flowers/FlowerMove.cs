@@ -63,13 +63,15 @@ public class FlowerMove : MonoBehaviour
         Debugger.Log(_speed.ToString());
         Debugger.Log((_endPosX / _speed).ToString());
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
+
         _speed = _speed * 0.01f;
         _isRotation = true;
     }
 
     private void Rotation()
     {
-        _pos = transform.position;
+        // 現在地を端として楕円に回転移動
+        _pos = gameObject.transform.position;
         _pos.x = Mathf.Sin(Time.time * _speed) * 150f;
         _pos.y = Mathf.Cos(Time.time * _speed) * 100f;
         transform.position = _pos;
