@@ -53,6 +53,7 @@ public class SampleReborn : MonoBehaviour
 
         // _animalsのrandNum番目の動物を表示
         _animals[randNum].SetActive(true);
+        _animals[randNum].GetComponent<Animal>().Alive(_rebirthPos);
         _animals[randNum].transform.position = _rebirthPos;
         _animals[randNum].transform.rotation = Quaternion.Euler(_rebirthRotation);
         _animals[randNum].transform.DOMoveX(_goalPosX, 5f);

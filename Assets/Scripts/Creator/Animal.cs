@@ -12,6 +12,11 @@ public class Animal : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void Alive(Vector3 pos)
+    {
+        _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(pos);
+    }
+
     private void Died()
     {
         // ここに死亡時の処理を追加
