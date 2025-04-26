@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class FlowerCreator : MonoBehaviour
 {
-    // [SerializeField] private GameObject _flowerPrefab;// 生成するflowerのPrefab
-    [SerializeField] private GameObject _flowerContentPrefab;
+    [SerializeField] private GameObject _flowerContentPrefab;// / flowerのPrefab
 
     [SerializeField] private Transform _flowerParent;// flowerの親オブジェクト
     private Sprite _flowerSprite;// 画像を設定するSprite

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 public class SampleFlowerCreator : MonoBehaviour
 {
-    private GameObject[] _flowerObjList;
-    [SerializeField] private GameObject _flowerObj;
-    [SerializeField] private int _flowerObjNum = 26;
-    private bool _isStarted = false;
+    private GameObject[] _flowerObjList;// / 花オブジェクトのリスト
+    [SerializeField] private GameObject _flowerObj;// / 花オブジェクト
+    [SerializeField] private int _flowerObjNum = 26;// リストに格納する花の数
+    private bool _isStarted = false;// Updateを呼ぶかどうかのフラグ
     public async UniTask ManualStart()
     {
+        // フラワーオブジェクトがnullかどうかを判定
         if (_flowerObj == null)
         {
             Debug.LogError("Error: _flowerObj is not assigned in the inspector.");
@@ -22,6 +23,8 @@ public class SampleFlowerCreator : MonoBehaviour
             Debug.Log("FlowerObj is assigned in the inspector.");
         }
 
+        // フラワーオブジェクトのリストを初期化
+        // リストにテンプレを格納
         _flowerObjList = new GameObject[_flowerObjNum];
         for (int i = 0; i < _flowerObjNum; i++)
         {
