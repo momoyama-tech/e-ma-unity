@@ -18,7 +18,7 @@ public class SampleFlowerObj : MonoBehaviour
     public async UniTask Initialize()
     {
         _parentFlowerElement = this.gameObject;
-        await CreateFlowerElements();
+        // await CreateFlowerElements();
         gameObject.GetComponent<FlowerMove>().Initialize();
     }
 

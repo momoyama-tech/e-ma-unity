@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flowerObj: {fileID: 1177904817018100244, guid: fbca6ecab2baf494489508346da37073, type: 3}
-  _flowerObjNum: 26
+  _flowerObjNum: 2
