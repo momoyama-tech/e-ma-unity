@@ -11,7 +11,7 @@ public class Animal : MonoBehaviour
 
     public void ManualUpdate()
     {
-        if (Mathf.Abs(gameObject.transform.position.x) <= Mathf.Abs(_goalPosX) - 10f)
+        if (Mathf.Abs(gameObject.transform.position.x) <= Mathf.Abs(_goalPosX) + 10f)
         {
             Died();
         }
@@ -19,8 +19,8 @@ public class Animal : MonoBehaviour
 
     private void Died()
     {
-        gameObject.SetActive(false);
         // ここに死亡時の処理を追加
         Debug.Log("Animal Died");
+        gameObject.SetActive(false);
     }
 }
