@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6209709839607017240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2798958846582691778}
+  - component: {fileID: 7420167406861408329}
+  - component: {fileID: 5083334555233909172}
+  m_Layer: 0
+  m_Name: SampleFlower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2798958846582691778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209709839607017240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7420167406861408329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209709839607017240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a458ed961fc42e7bdaa628783e1fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _totalStemNum: 2
+  _flowerScale: 3
+  _flowerElements:
+  - {fileID: 2095437571359463489, guid: 8c41f43d25d314a71afdc0cfe6e0f7e1, type: 3}
+  - {fileID: 3724056450645034105, guid: 87a0d3e38f3d14f6d85a64f0989bd459, type: 3}
+  - {fileID: 3020855155551224006, guid: 068790a58a3c54c59bc4e21223e2a0ee, type: 3}
+--- !u!114 &5083334555233909172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209709839607017240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e49cf3d535ad4211a3ba460c9586e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 100
