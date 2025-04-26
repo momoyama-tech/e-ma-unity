@@ -17,7 +17,9 @@ public class SampleReborn : MonoBehaviour
     {
         // このオブジェクトの子要素を全て_animalsに格納
         _animals = new GameObject[transform.childCount];
+        
         for (int i = 0; i < transform.childCount - 1; i++)
+        
         {
             _animals[i] = transform.GetChild(i).gameObject;
             _animals[i].GetComponent<Animal>().Initialize(_goalPosX);
@@ -28,7 +30,10 @@ public class SampleReborn : MonoBehaviour
         {
             _rebirthPos = new Vector3(-_rebirthPosX, _rebirthPosY, _rebirthPosZ);
             _rebirthRotation = new Vector3(0, -90, 0);
+            
+           
             _goalPosX *= -1;
+            
         }
         else
         {

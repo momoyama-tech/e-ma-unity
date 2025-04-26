@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 804262248077392338}
   - component: {fileID: 2550303520351348328}
   - component: {fileID: 4424932906943394046}
+  
   - component: {fileID: 3925877860664211546}
   m_Layer: 0
   m_Name: horsewalk

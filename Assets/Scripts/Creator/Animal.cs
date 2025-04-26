@@ -3,6 +3,7 @@ using UnityEngine;
 public class Animal : MonoBehaviour
 {
     private float _goalPosX;
+    
     [SerializeField] private GameObject _destroyEffectPrefab;
 
     public void Initialize(float goalPos)
@@ -15,6 +16,7 @@ public class Animal : MonoBehaviour
     public void Alive(Vector3 pos)
     {
         _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(pos);
+        
     }
 
     private void Died()
