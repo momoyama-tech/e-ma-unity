@@ -1720,7 +1720,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9503284c479b42d3b71154d6c5e61a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerObj: {fileID: 6209709839607017240, guid: a467ceb396b424496ba9021a821945a2, type: 3}
+  _flowerObj: {fileID: 0}
+  _flowerObjNum: 26
 --- !u!4 &1459344721
 Transform:
   m_ObjectHideFlags: 0
@@ -1766,7 +1767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e64c3360b884877a4162de92b1b65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flowerCreator: {fileID: 1459344720}
 --- !u!4 &1643315390
 Transform:
   m_ObjectHideFlags: 0

@@ -49,7 +49,19 @@ public class FlowerMove : MonoBehaviour
         // 右に移動
         Debugger.Log(_speed.ToString());
         Debugger.Log((_endPosX / _speed).ToString());
-        transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).OnComplete(() => OnEndPos().Forget());
+        transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).OnComplete(Rotation);
+    }
+
+    private void Rotation()
+    {
+        float speed = 2.0f;
+        GameObject target = this.gameObject;
+        Transform myTransform = target.transform;
+        Vector3 pos = myTransform.position;
+ 
+        pos.x = Mathf.Sin(Time.time * speed) * 150f;
+        pos.y = Mathf.Cos(Time.time * speed) * 100f;
+        myTransform.position = pos;
     }
 
     /// <summary>
