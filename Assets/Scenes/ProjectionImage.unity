@@ -2475,6 +2475,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1998258874594902449, guid: 6fe3553ee39984ea099f9c1e3883ce20, type: 3}
+      propertyPath: _flowerObjNum
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 6193697843169624154, guid: 6fe3553ee39984ea099f9c1e3883ce20, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

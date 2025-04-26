@@ -30,7 +30,7 @@ public class SampleFlowerCreator : MonoBehaviour
             _flowerObjList[i].transform.localPosition = new Vector3(0, 0, 0);
             _flowerObjList[i].GetComponent<SampleFlowerObj>().Initialize(null, null, null, i);
             // _flowerObjList[i].GetComponent<FlowerMove>().Initialize();
-            await UniTask.Delay(2000);
+            await UniTask.Delay(100);
         }
         _isStarted = true;
     }
