@@ -229,9 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a458ed961fc42e7bdaa628783e1fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalStemNum: 0
+  _totalStemNum: 2
   _flowerScale: 1
-  _flowerElements: []
+  _flowerElements:
+  - {fileID: 5492924909378214031, guid: 0ae7221d2b62e4f5a87804920ac325e9, type: 3}
+  - {fileID: 5492924909378214031, guid: c89b9fd46850f4e3795911cf9579edc8, type: 3}
+  - {fileID: 5492924909378214031, guid: ca9cff36557c34d0ca44b4a9fb179f85, type: 3}
 --- !u!114 &-7221674893580313575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e49cf3d535ad4211a3ba460c9586e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 200
+  _speed: 50
 --- !u!1 &3933392626112740357
 GameObject:
   m_ObjectHideFlags: 0

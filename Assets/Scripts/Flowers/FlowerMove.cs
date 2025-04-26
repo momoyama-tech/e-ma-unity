@@ -79,8 +79,8 @@ public class FlowerMove : MonoBehaviour
     {
         Debug.Log(gameObject.GetComponent<SampleFlowerObj>().GetId().ToString());
         _pos = _center; // 中心を基準に計算
-        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 6.3f) * 150f; // x軸方向の楕円運動
-        _pos.y += Mathf.Cos((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 6.3f) * 50f; // y軸方向の楕円運動
+        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 25.2f) * 150f; // x軸方向の楕円運動
+        _pos.y += Mathf.Cos((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 25.2f) * 50f; // y軸方向の楕円運動
         transform.position = _pos;
     }
 }
