@@ -70,10 +70,12 @@ public class FlowerMove : MonoBehaviour
 
     private void Rotation()
     {
-        // 現在地を端として楕円に回転移動
-        _pos = gameObject.transform.position;
-        _pos.x = Mathf.Sin(Time.time * _speed) * 150f;
-        _pos.y = Mathf.Cos(Time.time * _speed) * 100f;
+        // 回転の中心をx=-200に設定
+        Vector3 center = new Vector3(-200f, 0f, 0f); // 楕円の中心を(-200, 0, 0)に設定
+
+        _pos = center; // 中心を基準に計算
+        _pos.x += Mathf.Sin(Time.time * _speed) * 150f; // x軸方向の楕円運動
+        _pos.y += Mathf.Cos(Time.time * _speed) * 100f; // y軸方向の楕円運動
         transform.position = _pos;
     }
 }
