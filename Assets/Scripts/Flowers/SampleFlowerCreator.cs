@@ -10,6 +10,7 @@ public class SampleFlowerCreator : MonoBehaviour
     [SerializeField] private GameObject _flowerObj;// / 花オブジェクト
     [SerializeField] private int _flowerObjNum = 26;// リストに格納する花の数
     private bool _isStarted = false;// Updateを呼ぶかどうかのフラグ
+    private int _completeFlowerListNum = 0;// 完成した花の数
     public async UniTask ManualStart()
     {
         // フラワーオブジェクトがnullかどうかを判定
@@ -30,7 +31,7 @@ public class SampleFlowerCreator : MonoBehaviour
         {
             // Debugger.Log("FlowerObjNumber " + i + " is created");
             _flowerObjList[i] = Instantiate(_flowerObj, this.gameObject.transform);
-            _flowerObjList[i].transform.localPosition = new Vector3(0, 0, 0);
+            _flowerObjList[i].transform.localPosition = new Vector3(0, 0, -0.1f);
             _flowerObjList[i].GetComponent<SampleFlowerObj>().Initialize(null, null, null, i);
             // _flowerObjList[i].GetComponent<FlowerMove>().Initialize();
             await UniTask.Delay(100);
@@ -47,5 +48,15 @@ public class SampleFlowerCreator : MonoBehaviour
                 flowerObj.GetComponent<FlowerMove>().ManualUpdate();
             }
         }
+    }
+
+    public void SetFlowerInfo(string flowerUrl, string nameUrl, string wishUrl)
+    {
+        if(_completeFlowerListNum >= _flowerObjNum)
+        {
+            _completeFlowerListNum = 0;
+        }
+        _flowerObjList[_completeFlowerListNum].GetComponent<SampleFlowerObj>().SetFlowerInfo(flowerUrl, nameUrl, wishUrl);
+        _completeFlowerListNum++;
     }
 }

@@ -74,6 +74,8 @@ GameObject:
   - component: {fileID: 804262248077392338}
   - component: {fileID: 2550303520351348328}
   - component: {fileID: 4424932906943394046}
+  
+  - component: {fileID: 3925877860664211546}
   m_Layer: 0
   m_Name: horsewalk
   m_TagString: Untagged
@@ -90,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 27726300837356392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 101.156525, y: -60, z: -20}
+  m_LocalPosition: {x: 5.1, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -131,6 +133,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121673c10d7f947ac9ec3878dab8d6a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyEffectPrefab: {fileID: 5452504893265981222, guid: ef43a6dffb9754884880656b3390bfe5, type: 3}
+--- !u!136 &3925877860664211546
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27726300837356392}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0.8}
 --- !u!1 &37588433063929140
 GameObject:
   m_ObjectHideFlags: 0

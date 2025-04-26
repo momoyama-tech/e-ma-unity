@@ -2,6 +2,8 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System.Threading.Tasks;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class SampleFlowerObj : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class SampleFlowerObj : MonoBehaviour
     [SerializeField] private GameObject[] _flowerElements;// 花の要素(子葉の方から0番目)
     private GameObject _parentFlowerElement;
     private GameObject _selectedFlowerElement;
+    private Sprite _flowerSprite;// 画像を設定するSprite
     private string _flowerUrl = "";// 画像のURL
     private string _nameUrl = "";// 名前のURL
     private string _wishUrl = "";// 願いのURL
@@ -55,12 +58,12 @@ public class SampleFlowerObj : MonoBehaviour
     ///  要素は小さい状態で生成して徐々に大きくしていく
     /// </summary>
     /// <returns></returns>
-    private async UniTask CreateFlowerElements()
+    private async UniTask CreateFlowerElements(Sprite sprite)
     {
         // 子葉を生成
         SelectFlowerElements(_cotyledonNum);// 生成するオブジェクトを子葉に変更
         var cotyledon = Instantiate(_selectedFlowerElement, _parentFlowerElement.transform);// 子葉を生成
-        
+
         // cotyledonの大きさを変更
         cotyledon.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         cotyledon.transform.DOScale(new Vector3(1f * _flowerScale, 1f * _flowerScale, 0.7f * _flowerScale), 3f);
@@ -78,19 +81,20 @@ public class SampleFlowerObj : MonoBehaviour
 
             // 生成位置を子葉の位置から少し上にずらす
             // 徐々に大きくしながらy軸方向に座標移動
-            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * i  * _flowerScale, -0.01f * (i + 1));
+            stem.transform.position = cotyledon.transform.position + new Vector3(0, 5f * i * _flowerScale, -0.01f * (i + 1));
             stem.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             stem.transform.DOScale(new Vector3(1f * _flowerScale, 1f * _flowerScale, 0.7f * _flowerScale), 2f);
             stem.transform.DOMoveY(5f * (i + 1) * _flowerScale, 2f);
 
             await UniTask.Delay(1000);
         }
-
         await UniTask.Delay(2000);
 
         // 花が咲く
         SelectFlowerElements(_bloomingNum);// 生成するオブジェクトを花に変更
         var blooming = Instantiate(_selectedFlowerElement, _parentFlowerElement.transform);// 花を生成
+
+        blooming.GetComponent<SpriteRenderer>().sprite = sprite;
 
         // 生成位置を茎の位置から少し上にずらす
         // 徐々に大きくしながらy軸方向に座標移動
@@ -103,6 +107,60 @@ public class SampleFlowerObj : MonoBehaviour
 
         // 不要なTweenを削除
         DOTween.KillAll();
+    }
+
+    /// <summary>
+    /// flowerの画像を_urlから取得して設定する
+    /// </summary>
+    /// <param name="flower"></param>
+    /// <returns></returns>
+    private IEnumerator SetFlowerImage(GameObject flower)
+    {
+        // flowerの画像を_urlから取得して設定する
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(_flowerUrl);
+        yield return www.SendWebRequest();
+        Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        // flowerのSpriteRendererに設定する
+        flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
+    }
+
+    private IEnumerator SetNameImage(GameObject flower)
+    {
+        // flowerの名前を_urlから取得して設定する
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(_nameUrl);
+        yield return www.SendWebRequest();
+
+        // _urlから取得した画像をSpriteに変換
+        Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        // flowerのSpriteRendererに設定する
+        flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
+    }
+
+    private IEnumerator SetWishImage(GameObject flower)
+    {
+        // flowerの願いを_urlから取得して設定する
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(_wishUrl);
+        yield return www.SendWebRequest();
+        // _urlから取得した画像をSpriteに変換
+        Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
+        _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        // flowerのSpriteRendererに設定する
+        flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
+    }
+
+    public void SetFlowerInfo(string flowerUrl, string nameUrl, string wishUrl)
+    {
+        Debug.Log("花情報を設定");
+        _flowerUrl = flowerUrl;
+        _nameUrl = nameUrl;
+        _wishUrl = wishUrl;
+
+        // 花の要素を生成
+        StartCoroutine(SetFlowerImage(gameObject));
+        StartCoroutine(SetNameImage(gameObject.transform.Find("Name").gameObject));
+        StartCoroutine(SetWishImage(gameObject.transform.Find("Wish").gameObject));
     }
 
     public int GetId()

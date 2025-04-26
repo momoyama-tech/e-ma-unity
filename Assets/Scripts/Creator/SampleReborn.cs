@@ -17,7 +17,9 @@ public class SampleReborn : MonoBehaviour
     {
         // このオブジェクトの子要素を全て_animalsに格納
         _animals = new GameObject[transform.childCount];
-        for (int i = 0; i < transform.childCount; i++)
+        
+        for (int i = 0; i < transform.childCount - 1; i++)
+        
         {
             _animals[i] = transform.GetChild(i).gameObject;
             _animals[i].GetComponent<Animal>().Initialize(_goalPosX);
@@ -28,6 +30,10 @@ public class SampleReborn : MonoBehaviour
         {
             _rebirthPos = new Vector3(-_rebirthPosX, _rebirthPosY, _rebirthPosZ);
             _rebirthRotation = new Vector3(0, -90, 0);
+            
+           
+            _goalPosX *= -1;
+            
         }
         else
         {
@@ -43,20 +49,16 @@ public class SampleReborn : MonoBehaviour
             Reborn();
             Debug.Log("Reborn");
         }
-
-        foreach (var animal in _animals)
-        {
-            animal.GetComponent<Animal>().ManualUpdate();
-        }
     }
     private void Reborn()
     {
 
         // ランダムに動物を選択
-        int randNum = Random.Range(0, _animals.Length);
+        int randNum = Random.Range(0, _animals.Length - 1);
 
         // _animalsのrandNum番目の動物を表示
         _animals[randNum].SetActive(true);
+        _animals[randNum].GetComponent<Animal>().Alive(_rebirthPos);
         _animals[randNum].transform.position = _rebirthPos;
         _animals[randNum].transform.rotation = Quaternion.Euler(_rebirthRotation);
         _animals[randNum].transform.DOMoveX(_goalPosX, 5f);

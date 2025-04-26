@@ -14,6 +14,8 @@ public class ActionCableClient : MonoBehaviour
     private string flowerUrl = null;
     private string nameUrl = null;
     private string wishUrl = null;
+    [SerializeField] private GameObject _flowerCreator;
+    private bool _isFlowerInfoUpdated = false;
 
 
     [Serializable]
@@ -51,19 +53,34 @@ public class ActionCableClient : MonoBehaviour
             JObject wsMessageJson = JObject.Parse(e.Data);
             if ((String)wsMessageJson["type"] == "ping")
             {
-                 // Debug.Log("this message is ping, so  through");
+                // Debug.Log("this message is ping, so  through");
             }
             else if ((String)wsMessageJson["type"] == "confirm_subscription")
             {
                 // Debug.Log("this message is confirm_subscription, so  through");
             }
-            else {
-                Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
-                Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
-                Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
+            else
+            {
+                // Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
+                // Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
+                // Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
                 flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
                 nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
                 wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
+                _isFlowerInfoUpdated = true;
+                Debug.Log("flowerUrl: " + flowerUrl);
+                Debug.Log("nameUrl: " + nameUrl);
+                Debug.Log("wishUrl: " + wishUrl);
+                Debug.Log("上の情報から花を作る");
+
+                try
+                {
+                    Debug.Log(_flowerCreator.GetComponent<SampleFlowerCreator>());
+                }
+                catch (Exception ee)
+                {
+                    Debug.Log(ee);
+                }
             }
         };
 
@@ -82,6 +99,16 @@ public class ActionCableClient : MonoBehaviour
 
     void Update()
     {
+        if (_isFlowerInfoUpdated)
+        {
+            if (_flowerCreator != null)
+            {
+                _flowerCreator.GetComponent<SampleFlowerCreator>().SetFlowerInfo(flowerUrl, nameUrl, wishUrl);
+                Debug.Log("花情報をセットしました！");
+            }
+            _isFlowerInfoUpdated = false; // 処理終わったのでリセット
+        }
+
         if (Input.GetKeyUp("s"))
         {
             SendMessageToChannel("Hello from Unity!");
@@ -130,7 +157,7 @@ public class ActionCableClient : MonoBehaviour
 #if UNITY_EDITOR
         return "wss://e-ma-rails-staging-986464278422.asia-northeast1.run.app/cable";  // 開発環境
 #else
-         return "wss://your-production-url.com/cable";  // 本番環境
+        return "wss://your-production-url.com/cable";  // 本番環境
 #endif
     }
 
