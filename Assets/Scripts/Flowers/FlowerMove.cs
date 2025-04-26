@@ -9,6 +9,7 @@ public class FlowerMove : MonoBehaviour
     private float _endPosX = 400.0f; // 端の座標
     private float _centerPosX = 50.0f; // 中央の座標
     private bool _isOddNumber = false;
+    private int _rotateDirection = 1; // 回転方向
     private float _time = 0f; // 横方向の移動時間
     private Vector3 _pos; // 開始位置
     private bool _isRotation = false; // 回転フラグ
@@ -35,10 +36,12 @@ public class FlowerMove : MonoBehaviour
         {
             _center = new Vector3(-200, 0, 0);
             _endPosX *= -1;
+            _rotateDirection = -1;
         }
         else
         {
             _center = new Vector3(200, 0, 0);
+            _rotateDirection = 1;
         }
 
         Debugger.Log("初期化終了");
@@ -74,9 +77,10 @@ public class FlowerMove : MonoBehaviour
 
     private void Rotation()
     {
+        Debug.Log(gameObject.GetComponent<SampleFlowerObj>().GetId().ToString());
         _pos = _center; // 中心を基準に計算
-        _pos.x += Mathf.Sin(Time.time * _speed) * 150f; // x軸方向の楕円運動
-        _pos.y += Mathf.Cos(Time.time * _speed) * 100f; // y軸方向の楕円運動
+        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 150f; // x軸方向の楕円運動
+        _pos.y += _rotateDirection * Mathf.Cos((Time.time * _speed) - gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 100f; // y軸方向の楕円運動
         transform.position = _pos;
     }
 }
