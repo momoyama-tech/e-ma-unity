@@ -28,6 +28,7 @@ public class SampleReborn : MonoBehaviour
         {
             _rebirthPos = new Vector3(-_rebirthPosX, _rebirthPosY, _rebirthPosZ);
             _rebirthRotation = new Vector3(0, -90, 0);
+            _goalPosX *= -1;
         }
         else
         {
@@ -42,11 +43,6 @@ public class SampleReborn : MonoBehaviour
         {
             Reborn();
             Debug.Log("Reborn");
-        }
-
-        foreach (var animal in _animals)
-        {
-            animal.GetComponent<Animal>().ManualUpdate();
         }
     }
     private void Reborn()

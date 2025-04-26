@@ -10,6 +10,7 @@ public class Disappearance : MonoBehaviour
 
     void Start()
     {
+        gameObject.SetActive(true);
         Activate();
     }
 
