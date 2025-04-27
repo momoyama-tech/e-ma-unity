@@ -185,6 +185,7 @@ MonoBehaviour:
   - {fileID: 5492924909378214031, guid: 0ae7221d2b62e4f5a87804920ac325e9, type: 3}
   - {fileID: 5492924909378214031, guid: c89b9fd46850f4e3795911cf9579edc8, type: 3}
   - {fileID: 5492924909378214031, guid: ca9cff36557c34d0ca44b4a9fb179f85, type: 3}
+  _flowerStartAnimation: {fileID: 0}
 --- !u!114 &-7221674893580313575
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class FlowerMove : MonoBehaviour
         // 親コンポーネントを取得
         var parent = this.gameObject.transform.parent;
         
+        // idが偶数かどうかを判定
         if(gameObject.GetComponent<SampleFlowerObj>().GetId() % 2 == 0)
         {
             _isOddNumber = true;
@@ -32,6 +33,8 @@ public class FlowerMove : MonoBehaviour
             _isOddNumber = false;
         }
 
+        // 奇数番目なら左から右にすすむ
+        // 偶数番目なら右から左に進む
         if(_isOddNumber)
         {
             _center = new Vector3(-200, 0, 0);
@@ -52,10 +55,8 @@ public class FlowerMove : MonoBehaviour
 
     public void ManualUpdate()
     {
-        // Debugger.Log("ManualUpdate");
         if(_isRotation)
         {
-            // Debugger.Log("回転開始");
             Rotation();
         }
     }
@@ -75,9 +76,11 @@ public class FlowerMove : MonoBehaviour
         _isRotation = true;
     }
 
+    /// <summary>
+    /// 転生後の回転移動
+    /// </summary>
     private void Rotation()
     {
-        // Debug.Log(gameObject.GetComponent<SampleFlowerObj>().GetId().ToString());
         _pos = _center; // 中心を基準に計算
         _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 150f; // x軸方向の楕円運動
         _pos.y += Mathf.Cos((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 50f; // y軸方向の楕円運動
