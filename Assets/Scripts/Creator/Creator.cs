@@ -8,8 +8,8 @@ public class Creator : MonoBehaviour
     [SerializeField] private float _createMinRangeX = -400f; // 生成範囲の最小値
     [SerializeField] private float _createMaxRangeY = 60f; // 生成範囲の最大値
     [SerializeField] private float _createMinRangeY = -60f; // 生成範囲の最小値
-    [SerializeField] private float _createMaxRangeZ = -20f; // 生成範囲の最大値
-    [SerializeField] private float _createMinRangeZ = -300f; // 生成範囲の最小値
+    [SerializeField] private float _createMaxRangeZ = -0.5f; // 生成範囲の最大値
+    [SerializeField] private float _createMinRangeZ = -0.5f; // 生成範囲の最小値
 
     public void ManualStart()
     {
