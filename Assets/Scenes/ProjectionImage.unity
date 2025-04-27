@@ -8012,6 +8012,14 @@ PrefabInstance:
       value: -68
       objectReference: {fileID: 0}
     - target: {fileID: 8625042982865503517, guid: 46de761eb2c624a25b9dd270e0eeeecc, type: 3}
+      propertyPath: _goalPosX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625042982865503517, guid: 46de761eb2c624a25b9dd270e0eeeecc, type: 3}
+      propertyPath: _rebirthPosX
+      value: -370
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625042982865503517, guid: 46de761eb2c624a25b9dd270e0eeeecc, type: 3}
       propertyPath: _rebirthPosZ
       value: -5
       objectReference: {fileID: 0}
@@ -8147,6 +8155,14 @@ PrefabInstance:
     - target: {fileID: 357409184340167940, guid: 629c2d01f80d34586baa6b1291e6207c, type: 3}
       propertyPath: m_LocalPosition.y
       value: -61
+      objectReference: {fileID: 0}
+    - target: {fileID: 491531827102685528, guid: 629c2d01f80d34586baa6b1291e6207c, type: 3}
+      propertyPath: _goalPosX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491531827102685528, guid: 629c2d01f80d34586baa6b1291e6207c, type: 3}
+      propertyPath: _rebirthPosX
+      value: -370
       objectReference: {fileID: 0}
     - target: {fileID: 491531827102685528, guid: 629c2d01f80d34586baa6b1291e6207c, type: 3}
       propertyPath: _rebirthPosZ

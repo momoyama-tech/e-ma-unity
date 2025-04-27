@@ -14,7 +14,7 @@ public class Animal : MonoBehaviour
 
     public void Alive(Vector3 pos)
     {
-        _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(pos);
+        _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(new Vector3(pos.x, pos.y + 15.0f, pos.z));
     }
 
     private void Died()
