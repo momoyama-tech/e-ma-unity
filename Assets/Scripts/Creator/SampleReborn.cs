@@ -47,6 +47,6 @@ public class SampleReborn : MonoBehaviour
         _animals[randNum].GetComponent<Animal>().Alive(_rebirthPos);
         _animals[randNum].transform.position = _rebirthPos;
         _animals[randNum].transform.rotation = Quaternion.Euler(_rebirthRotation);
-        _animals[randNum].transform.DOMoveX(_goalPosX, 5f);
+        _animals[randNum].transform.DOMoveX(_goalPosX, 45 / _animals[randNum].GetComponent<Animal>().GetSpeed());
     }
 }

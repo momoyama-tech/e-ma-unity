@@ -4,6 +4,7 @@ public class Animal : MonoBehaviour
 {
     private float _goalPosX;
     [SerializeField] private GameObject _destroyEffectPrefab;
+    [SerializeField] private float _speed = 5.0f; // 移動速度
 
     public void Initialize(float goalPos)
     {
@@ -33,5 +34,10 @@ public class Animal : MonoBehaviour
             Debugger.Log("Animal collided with Destroy");
             Died();
         }
+    }
+
+    public float GetSpeed()
+    {
+        return _speed;
     }
 }
