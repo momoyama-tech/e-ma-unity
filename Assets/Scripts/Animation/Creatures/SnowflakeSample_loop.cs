@@ -7,23 +7,23 @@ public class SnowflakeSample_loop : MonoBehaviour
     [Header("出現位置の設定")]
     [SerializeField] private float _bornPosXMin = -50f; // 出現位置Xの最小値（横方向の最小位置）
     [SerializeField] private float _bornPosXMax = 50f; // 出現位置Xの最大値（横方向の最大位置）
-    [SerializeField] private float _bornPosYMin = 0f; // 出現位置Yの最小値（高さ方向の最小位置）
-    [SerializeField] private float _bornPosYMax = 50f; // 出現位置Yの最大値（高さ方向の最大位置）
+    [SerializeField] private float _bornPosYMin = 50f; // 出現位置Yの最小値（高さ方向の最小位置）
+    [SerializeField] private float _bornPosYMax = 100f; // 出現位置Yの最大値（高さ方向の最大位置）
     [SerializeField] private float _bornPosZMin = -50f; // 出現位置Zの最小値（奥行き方向の最小位置）
     [SerializeField] private float _bornPosZMax = 50f; // 出現位置Zの最大値（奥行き方向の最大位置）
 
     [Header("雪の設定")]
     [SerializeField] private float _snowflakeSizeMin = 0.1f; // 雪の大きさ最小値
     [SerializeField] private float _snowflakeSizeMax = 0.3f; // 雪の大きさ最大値
-    [SerializeField] private bool _isRotate = false; // 回転するかどうか
+    [SerializeField] private bool _isRotate = true; // 回転するかどうか
     [SerializeField] private bool _isFall = true; // 落ちるかどうか
     [SerializeField] private bool _isSway = true; // 左右にフラフラ動くかどうか
 
     [Header("動きの設定")]
-    [SerializeField] private float _fallSpeedMin = 1f; // 落下速度最小値（秒単位）
-    [SerializeField] private float _fallSpeedMax = 3f; // 落下速度最大値（秒単位）
+    [SerializeField] private float _fallSpeedMin = 2f; // 落下速度最小値（秒単位）
+    [SerializeField] private float _fallSpeedMax = 10f; // 落下速度最大値（秒単位）
     [SerializeField] private float _swayAmountMin = 0f; // 左右に揺れる最小距離
-    [SerializeField] private float _swayAmountMax = 3f; // 左右に揺れる最大距離
+    [SerializeField] private float _swayAmountMax = 2f; // 左右に揺れる最大距離
 
     private Vector3 _bornPos; // 出現座標
     private Tween _rotationTween; // 回転Tween
