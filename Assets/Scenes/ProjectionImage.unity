@@ -2057,7 +2057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &569088515
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,7 +3537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1023498133
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8336,6 +8336,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4934888517957636817, guid: 91716c83fbe1643d5bc0b0938501df58, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4934888517957636817, guid: 91716c83fbe1643d5bc0b0938501df58, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -22,7 +22,7 @@ public class Animal : MonoBehaviour
         // ここに死亡時の処理を追加
         Debug.Log("Animal Died");
         // _destroyEffectPrefab にアタッチされているスクリプトを取得して Initialize を呼び出す
-        _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(gameObject.transform.position);
+        _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 15.0f, gameObject.transform.position.z));
         gameObject.SetActive(false);
     }
 
