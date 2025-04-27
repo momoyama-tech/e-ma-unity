@@ -8,7 +8,7 @@ public class FlowerStartAnimation : MonoBehaviour
 
     public void ManualStart()
     {
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public async UniTask Initialize()
     {

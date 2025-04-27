@@ -5,6 +5,12 @@ public class InGame : MonoBehaviour
     [SerializeField] private SampleFlowerCreator _flowerCreator;
     [SerializeField] private SampleReborn _rebornLeftSide = null;
     [SerializeField] private SampleReborn _rebornRightSide = null;
+    [SerializeField] private int _animalBornFastestTime = 0;
+    [SerializeField] private int _animalBornSlowestTime = 0;
+    private float _randNumLeftSide = 0;
+    private float _randNumRightSide = 0;
+    private float _frameCounterLeftSide = 0;
+    private float _frameCounterRightSide = 0;
 
     void Start()
     {
@@ -12,12 +18,30 @@ public class InGame : MonoBehaviour
         _flowerCreator.ManualStart();
         _rebornLeftSide.ManualStart();
         _rebornRightSide.ManualStart();
+
+        _randNumLeftSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+        _randNumRightSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
     }
 
     void Update()
     {
         _flowerCreator.ManualUpdate();
-        _rebornLeftSide.ManualUpdate();
-        _rebornRightSide.ManualUpdate();
+
+        if(_frameCounterLeftSide >= _randNumLeftSide * 0.001f)
+        {
+            _frameCounterLeftSide = 0;
+            _randNumLeftSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+            _rebornLeftSide.Reborn();
+        }
+
+        if(_frameCounterRightSide >= _randNumRightSide * 0.001f)
+        {
+            _frameCounterRightSide = 0;
+            _randNumRightSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+            _rebornRightSide.Reborn();
+        }
+
+        _frameCounterLeftSide += Time.deltaTime;
+        _frameCounterRightSide += Time.deltaTime;
     }
 }

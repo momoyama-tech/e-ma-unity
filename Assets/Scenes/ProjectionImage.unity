@@ -2953,6 +2953,8 @@ MonoBehaviour:
   _flowerCreator: {fileID: 1459344720}
   _rebornLeftSide: {fileID: 886568919}
   _rebornRightSide: {fileID: 478869032}
+  _animalBornFastestTime: 2000
+  _animalBornSlowestTime: 5000
 --- !u!4 &1643315390
 Transform:
   m_ObjectHideFlags: 0

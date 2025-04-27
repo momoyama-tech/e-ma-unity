@@ -36,16 +36,7 @@ public class SampleReborn : MonoBehaviour
             _rebirthRotation = new Vector3(0, 90, 0);
         }
     }
-
-    public void ManualUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reborn();
-            Debug.Log("Reborn");
-        }
-    }
-    private void Reborn()
+    public void Reborn()
     {
 
         // ランダムに動物を選択
