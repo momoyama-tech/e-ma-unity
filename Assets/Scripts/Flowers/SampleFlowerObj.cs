@@ -150,7 +150,7 @@ public class SampleFlowerObj : MonoBehaviour
         flower.GetComponent<SpriteRenderer>().sprite = _flowerSprite;
     }
 
-    public void SetFlowerInfo(string flowerUrl, string nameUrl, string wishUrl)
+    public async UniTask SetFlowerInfo(string flowerUrl, string nameUrl, string wishUrl)
     {
         Debug.Log("花情報を設定");
         _flowerUrl = flowerUrl;

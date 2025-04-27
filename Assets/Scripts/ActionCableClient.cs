@@ -4,6 +4,7 @@ using System;
 using UnityEngine.Networking;
 using System.Collections;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 public class ActionCableClient : MonoBehaviour
 {
@@ -97,7 +98,7 @@ public class ActionCableClient : MonoBehaviour
         ws.Connect();
     }
 
-    void Update()
+    async Task Update()
     {
         if (_isFlowerInfoUpdated)
         {
