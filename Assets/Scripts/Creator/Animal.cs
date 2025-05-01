@@ -3,6 +3,7 @@ using UnityEngine;
 public class Animal : MonoBehaviour
 {
     private float _goalPosX;
+    
     [SerializeField] private GameObject _destroyEffectPrefab;
     [SerializeField] private float _speed = 5.0f; // 移動速度
 
@@ -16,6 +17,7 @@ public class Animal : MonoBehaviour
     public void Alive(Vector3 pos)
     {
         _destroyEffectPrefab.GetComponent<Disappearance>().Initialize(new Vector3(pos.x, pos.y + 15.0f, pos.z));
+        
     }
 
     private void Died()
