@@ -20,23 +20,31 @@ public class CreateController : MonoBehaviour
 
     public void ManualUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
             ShowPrefab(0);
-        if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
             ShowPrefab(1);
-        if(Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
             ShowPrefab(2);
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
             ShowPrefab(3);
-        if(Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G))
             ShowPrefab(4);
-        if(Input.GetKeyDown(KeyCode.H))
-            ShowPrefab(5);
-        if(Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                ShowPrefab(1);
+                ShowPrefab(2);
+                ShowPrefab(3);
+                ShowPrefab(4);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.J))
             ShowPrefab(6);
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
             ShowPrefab(7);
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
             ShowPrefab(8);
     }
 
