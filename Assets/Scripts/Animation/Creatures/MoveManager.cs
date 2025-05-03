@@ -11,9 +11,6 @@ public class MoveManager : MonoBehaviour
     [SerializeField] private float _targetPosX = 5;// 目的地X
     [SerializeField] private float _targetPosY = 0;// 目的地Y
     [SerializeField] private float _targetPosZ = 0;// 目的地Z
-    // [SerializeField] private float _initRotateX = 0;// 初期回転X
-    // [SerializeField] private float _initRotateY = 0;// 初期回転Y
-    // [SerializeField] private float _initRotateZ = 0;// 初期回転Z
 
     [SerializeField] private float _moveSpeed = 1;// 移動速度
     [SerializeField] private GameObject _disappearPrefab;// 消失するPrefab
@@ -28,9 +25,9 @@ public class MoveManager : MonoBehaviour
         _bornPosY = transform.position.y;
         _bornPosZ = transform.position.z;
 
-        _targetPosX = _bornPosX + _targetPosX;
-        _targetPosY = _bornPosY + _targetPosY;
-        _targetPosZ = _bornPosZ + _targetPosZ;
+        _targetPosX = _targetPosX;
+        _targetPosY = _targetPosY;
+        _targetPosZ = _targetPosZ;
 
         _bornPos = new Vector3(_bornPosX, _bornPosY, _bornPosZ);
         _targetPos = new Vector3(_targetPosX, _targetPosY, _targetPosZ);
@@ -49,7 +46,7 @@ public class MoveManager : MonoBehaviour
     private async UniTask Move()
     {
         // 目的地に向かって移動
-        await transform.DOMove(_targetPos, _lifeTime).SetEase(Ease.Linear).AsyncWaitForCompletion();
+        await transform.DOLocalMove(_targetPos, _lifeTime).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
         // 目的地に到達したら消滅
         Disable();    
