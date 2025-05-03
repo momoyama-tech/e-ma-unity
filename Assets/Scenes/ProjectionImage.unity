@@ -5815,6 +5815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButterFlyGroupCreator
       objectReference: {fileID: 0}
+    - target: {fileID: 822031064418250507, guid: c5657afddfa774c189cf6686b3ca0e91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4693486451783837741, guid: c5657afddfa774c189cf6686b3ca0e91, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5898,7 +5902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 812166100266223878, guid: d0d29d10315144ead9b238c323e48dc2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1456309693587186842, guid: d0d29d10315144ead9b238c323e48dc2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6024,6 +6028,10 @@ PrefabInstance:
     - target: {fileID: 1787186299586212380, guid: 46de761eb2c624a25b9dd270e0eeeecc, type: 3}
       propertyPath: m_Name
       value: AnimalCreatorRightSide
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787186299586212380, guid: 46de761eb2c624a25b9dd270e0eeeecc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2823331678116567185, guid: 46de761eb2c624a25b9dd270e0eeeecc, type: 3}
       propertyPath: _speed
@@ -6229,6 +6237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnimalCreatorLeftSide
       objectReference: {fileID: 0}
+    - target: {fileID: 1403635741120325602, guid: 629c2d01f80d34586baa6b1291e6207c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2961243222026231549, guid: 629c2d01f80d34586baa6b1291e6207c, type: 3}
       propertyPath: _speed
       value: 10
@@ -6428,6 +6440,10 @@ PrefabInstance:
     - target: {fileID: 6355182019998563874, guid: 91716c83fbe1643d5bc0b0938501df58, type: 3}
       propertyPath: m_Name
       value: Destroy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355182019998563874, guid: 91716c83fbe1643d5bc0b0938501df58, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4311752117721103055, guid: 91716c83fbe1643d5bc0b0938501df58, type: 3}
