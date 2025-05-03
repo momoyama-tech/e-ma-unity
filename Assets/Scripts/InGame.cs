@@ -29,6 +29,7 @@ public class InGame : MonoBehaviour
 
     void Update()
     {
+        _emaCreator.GetComponent<EmaCreator>().ManualUpdate();
         // _creatorContoroller.GetComponent<CreateController>().ManualUpdate();
         // _flowerCreator.ManualUpdate();
 

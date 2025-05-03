@@ -11,15 +11,22 @@ public class EmaCreator : MonoBehaviour
     {
         _spriteChanger = GetComponent<SpriteChanger>();
     }
+
+    public void ManualUpdate()
+    {
+        foreach (var ema in GetComponentsInChildren<EmaMove>())
+        {
+            ema.GetComponent<EmaMove>().ManualUpdate();
+        }
+    }
     public async UniTask CreateEma(string flowerUrl, string nameUrl, string wishUrl)
     {
         var ema = Instantiate(_emaPrefab, gameObject.transform);
         await _spriteChanger.Initialize(flowerUrl, nameUrl, wishUrl);
-        Debug.Log("フラワースプライトゲット" + _spriteChanger.GetFlowerSprite());
-        Debug.Log("ネームスプライトゲット" + _spriteChanger.GetNameSprite());
-        Debug.Log("ウィッシュスプライトゲット" + _spriteChanger.GetWishSprite());
         ema.GetComponent<SpriteRenderer>().sprite = _spriteChanger.GetFlowerSprite();
         ema.transform.Find("Name").GetComponent<SpriteRenderer>().sprite = _spriteChanger.GetNameSprite();
         ema.transform.Find("Wish").GetComponent<SpriteRenderer>().sprite = _spriteChanger.GetWishSprite();
+
+        await ema.GetComponent<EmaMove>().Initialize();
     }
 }

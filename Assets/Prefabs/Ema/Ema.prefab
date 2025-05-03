@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1.2
+  m_Time: 200
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 6386088262365416571}
   - component: {fileID: 110360631281984706}
   - component: {fileID: 8643353109518837642}
+  - component: {fileID: -7218041977315432135}
   m_Layer: 0
   m_Name: Ema
   m_TagString: Untagged
@@ -469,3 +470,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-7218041977315432135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587663613407799714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207115b7e20c44734be1d6a2b4da3438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 50

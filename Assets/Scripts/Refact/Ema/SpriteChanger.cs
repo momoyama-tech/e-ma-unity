@@ -24,8 +24,6 @@ public class SpriteChanger : MonoBehaviour
         await www.SendWebRequest();
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-        Debugger.RefactLog("flower sprite is set");
-        Debug.Log(_flowerSprite);
     }
 
     private async UniTask SetNameImage(string nameUrl)
@@ -35,8 +33,6 @@ public class SpriteChanger : MonoBehaviour
         await www.SendWebRequest();
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _nameSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-        Debugger.RefactLog("name sprite is set");
-        Debug.Log(_nameSprite);
     }
 
     private async UniTask SetWishImage(string wishUrl)
@@ -46,8 +42,6 @@ public class SpriteChanger : MonoBehaviour
         await www.SendWebRequest();
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _wishSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
-        Debugger.RefactLog("wish sprite is set");
-        Debug.Log(_wishSprite);
     }
 
     public Sprite GetFlowerSprite()
