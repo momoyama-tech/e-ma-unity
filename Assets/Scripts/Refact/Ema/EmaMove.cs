@@ -19,10 +19,13 @@ public class EmaMove : MonoBehaviour
     public async UniTask Initialize()
     {
         Debugger.RefactLog("EmaMoveの初期化開始");
+
         // 移動時間を計算
         _time = Math.Abs(_endPosX / _speed);
+
         // 親コンポーネントを取得
         _emaQueue = this.gameObject.transform.parent.GetComponent<EmaQueue>();
+
         _ema = gameObject.GetComponent<Ema>();
 
         // idが偶数かどうかを判定
@@ -43,14 +46,26 @@ public class EmaMove : MonoBehaviour
         Debugger.RefactLog("初期化終了");
 
         await Move();
+
         Debugger.RefactLog("移動完了03");
     }
 
+    /// <summary>
+    /// まずは移動を行い、次に回転を行う
+    /// 回転はUpdateで行う
+    /// </summary>
     public void ManualUpdate()
     {
         if(_isRotation)
         {
             Rotation();
+        }
+
+        // デバッグ用
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _emaQueue.DeQueue(true);
+            gameObject.SetActive(true);
         }
     }
 
@@ -60,7 +75,7 @@ public class EmaMove : MonoBehaviour
     private async UniTask Move()
     {
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
-        _emaQueue.EnQueue(_ema.GetId(), _isOddNumber); // キューに追加
+        _emaQueue.EnQueue(_ema.GetId(), !_isOddNumber); // キューに追加
         gameObject.SetActive(false); // オブジェクトを非アクティブにする
         // _speed = _speed * 0.01f;
         _isRotation = true;
@@ -85,6 +100,10 @@ public class EmaMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 右か左かを判定する
+    /// 回転の中心を決定する
+    /// </summary>
     private void CheckIsRight()
     {
         if(_ema.GetIsRight())

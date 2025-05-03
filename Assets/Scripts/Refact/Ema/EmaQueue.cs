@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class EmaQueue : MonoBehaviour
 {
-    private Queue<int> _rightEmaQueue;
-    private Queue<int> _leftEmaQueue;
+    private Queue<int> _rightEmaQueue;// 右側のEmaのIDを格納するキュー
+    private Queue<int> _leftEmaQueue;// 左側のEmaのIDを格納するキュー
 
     public void Initialize()
     {
@@ -12,6 +12,12 @@ public class EmaQueue : MonoBehaviour
         _leftEmaQueue = new Queue<int>();
     }
 
+    /// <summary>
+    /// EmaのIDをキューに追加するメソッド
+    /// isRightがtrueなら右側のキューに追加、falseなら左側のキューに追加
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="isRight"></param>
     public void EnQueue(int id, bool isRight)
     {
         if (isRight)
@@ -24,15 +30,30 @@ public class EmaQueue : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 右側のEmaのIDをキューに追加するメソッド
+    /// </summary>
+    /// <param name="id"></param>
     private void EnqueueRight(int id)
     {
         _rightEmaQueue.Enqueue(id);
     }
+
+    /// <summary>
+    /// 左側のEmaのIDをキューに追加するメソッド
+    /// </summary>
+    /// <param name="id"></param>
     private void EnqueueLeft(int id)
     {
         _leftEmaQueue.Enqueue(id);
     }
 
+    /// <summary>
+    /// EmaのIDをキューから取り出すメソッド
+    /// isRightがtrueなら右側のキューから取り出し、falseなら左側のキューから取り出す
+    /// </summary>
+    /// <param name="isRight"></param>
+    /// <returns></returns>
     public int DeQueue(bool isRight)
     {
         if (isRight)
@@ -44,6 +65,11 @@ public class EmaQueue : MonoBehaviour
             return DequeueLeft();
         }
     }
+
+    /// <summary>
+    /// 右側のEmaのIDをキューから取り出すメソッド
+    /// </summary>
+    /// <returns></returns>
     private int DequeueRight()
     {
         if (_rightEmaQueue.Count > 0)
@@ -56,6 +82,11 @@ public class EmaQueue : MonoBehaviour
             return -1; // or some other error value
         }
     }
+
+    /// <summary>
+    /// 左側のEmaのIDをキューから取り出すメソッド
+    /// </summary>
+    /// <returns></returns>
     private int DequeueLeft()
     {
         if (_leftEmaQueue.Count > 0)

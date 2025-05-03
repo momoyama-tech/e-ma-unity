@@ -17,6 +17,11 @@ public class SpriteChanger : MonoBehaviour
         await SetWishImage(wishUrl);
     }
 
+    /// <summary>
+    /// サーバーから取得したurlを元にflowerの画像を取得し、スプライトを設定する
+    /// </summary>
+    /// <param name="flowerUrl"></param>
+    /// <returns></returns>
     private async UniTask SetFlowerInfo(string flowerUrl)
     {
         // flowerの画像を_urlから取得して設定する
@@ -26,6 +31,11 @@ public class SpriteChanger : MonoBehaviour
         _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
     }
 
+    /// <summary>
+    /// flowerの名前をサーバーから取得したurlを元に取得し、スプライトを設定する
+    /// </summary>
+    /// <param name="nameUrl"></param>
+    /// <returns></returns>
     private async UniTask SetNameImage(string nameUrl)
     {
         // flowerの名前を_urlから取得して設定する
@@ -35,6 +45,11 @@ public class SpriteChanger : MonoBehaviour
         _nameSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
     }
 
+    /// <summary>
+    /// flowerの願いをサーバーから取得したurlを元に取得し、スプライトを設定する
+    /// </summary>
+    /// <param name="wishUrl"></param>
+    /// <returns></returns>
     private async UniTask SetWishImage(string wishUrl)
     {
         // flowerの願いを_urlから取得して設定する

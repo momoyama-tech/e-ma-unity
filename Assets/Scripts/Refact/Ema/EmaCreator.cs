@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EmaCreator : MonoBehaviour
 {
-    private int _id;
+    private int _id;// EmaのID、全てのEmaにユニークなIDを付与するために使用
     private SpriteChanger _spriteChanger;
     [SerializeField] private GameObject _emaPrefab;
 
@@ -25,6 +25,17 @@ public class EmaCreator : MonoBehaviour
             ema.GetComponent<EmaMove>().ManualUpdate();
         }
     }
+
+    /// <summary>
+    /// Emaを生成するメソッド
+    /// flowerUrl, nameUrl, wishUrlの3つのURLを受け取り、EmaPrefabをインスタンス化し、スプライトを設定
+    /// EmaPrefabの子オブジェクトにスプライトを設定する
+    /// EmaPrefabのスプライトはSpriteChangerを使用して取得
+    /// </summary>
+    /// <param name="flowerUrl"></param>
+    /// <param name="nameUrl"></param>
+    /// <param name="wishUrl"></param>
+    /// <returns></returns>
     public async UniTask CreateEma(string flowerUrl, string nameUrl, string wishUrl)
     {
         if (_emaPrefab == null)
@@ -33,6 +44,7 @@ public class EmaCreator : MonoBehaviour
             return;
         }
 
+        // EmaPrefabをインスタンス化
         var emaObj = Instantiate(_emaPrefab, gameObject.transform);
 
         // SpriteChanger のインスタンスを複製して初期化
