@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using Cysharp.Threading.Tasks;
+using System.Threading.Tasks;
 
 public class SpriteChanger : MonoBehaviour
 {
@@ -8,38 +10,44 @@ public class SpriteChanger : MonoBehaviour
     private Sprite _nameSprite;
     private Sprite _wishSprite;
 
-    public void Initialize(string flowerUrl, string nameUrl, string wishUrl)
+    public async UniTask Initialize(string flowerUrl, string nameUrl, string wishUrl)
     {
-        StartCoroutine(SetFlowerInfo(flowerUrl));
-        StartCoroutine(SetNameImage(nameUrl));
-        StartCoroutine(SetWishImage(wishUrl));
+        await SetFlowerInfo(flowerUrl);
+        await SetNameImage(nameUrl);
+        await SetWishImage(wishUrl);
     }
 
-    private IEnumerator SetFlowerInfo(string flowerUrl)
+    private async UniTask SetFlowerInfo(string flowerUrl)
     {
         // flowerの画像を_urlから取得して設定する
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(flowerUrl);
-        yield return www.SendWebRequest();
+        await www.SendWebRequest();
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        Debugger.RefactLog("flower sprite is set");
+        Debug.Log(_flowerSprite);
     }
 
-    private IEnumerator SetNameImage(string nameUrl)
+    private async UniTask SetNameImage(string nameUrl)
     {
         // flowerの名前を_urlから取得して設定する
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(nameUrl);
-        yield return www.SendWebRequest();
+        await www.SendWebRequest();
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _nameSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        Debugger.RefactLog("name sprite is set");
+        Debug.Log(_nameSprite);
     }
 
-    private IEnumerator SetWishImage(string wishUrl)
+    private async UniTask SetWishImage(string wishUrl)
     {
         // flowerの願いを_urlから取得して設定する
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(wishUrl);
-        yield return www.SendWebRequest();
+        await www.SendWebRequest();
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _wishSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
+        Debugger.RefactLog("wish sprite is set");
+        Debug.Log(_wishSprite);
     }
 
     public Sprite GetFlowerSprite()

@@ -6,4 +6,9 @@ public class Debugger : MonoBehaviour
     {
         // Debug.Log(message);
     }
+
+    public static void RefactLog(string message)
+    {
+        Debug.Log(message);
+    }
 }
