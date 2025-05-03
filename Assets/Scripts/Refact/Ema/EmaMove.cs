@@ -13,43 +13,37 @@ public class EmaMove : MonoBehaviour
     private Vector3 _pos; // 開始位置
     private bool _isRotation = false; // 回転フラグ
     private Vector3 _center; // 中心座標
+    private EmaQueue _emaQueue;
+    private Ema _ema;
 
     public async UniTask Initialize()
     {
-        // Debugger.Log(_speed.ToString());
+        Debugger.RefactLog("EmaMoveの初期化開始");
         // 移動時間を計算
         _time = Math.Abs(_endPosX / _speed);
         // 親コンポーネントを取得
-        var parent = this.gameObject.transform.parent;
-        
+        _emaQueue = this.gameObject.transform.parent.GetComponent<EmaQueue>();
+        _ema = gameObject.GetComponent<Ema>();
+
         // idが偶数かどうかを判定
-        // if(gameObject.GetComponent<SampleFlowerObj>().GetId() % 2 == 0)
-        // {
-        //     _isOddNumber = true;
-        // }
-        // else
-        // {
-        //     _isOddNumber = false;
-        // }
+        if(_ema.GetId() % 2 == 0)
+        {
+            _isOddNumber = true;
+        }
+        else
+        {
+            _isOddNumber = false;
+        }
 
         // 奇数番目なら左から右にすすむ
         // 偶数番目なら右から左に進む
-        // if(_isOddNumber)
-        // {
-            // _center = new Vector3(-200, 0, 0);
-        //     _endPosX *= -1;
-        //     _rotateDirection = -1;
-        // }
-        // else
-        // {
-            _center = new Vector3(200, 0, 0);
-        //     _rotateDirection = 1;
-        // }
+        if(_isOddNumber)
+            _endPosX *= -1;
 
-        Debugger.Log("初期化終了");
+        Debugger.RefactLog("初期化終了");
 
         await Move();
-        Debugger.Log("移動完了03");
+        Debugger.RefactLog("移動完了03");
     }
 
     public void ManualUpdate()
@@ -66,7 +60,8 @@ public class EmaMove : MonoBehaviour
     private async UniTask Move()
     {
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
-
+        _emaQueue.EnQueue(_ema.GetId(), _isOddNumber); // キューに追加
+        gameObject.SetActive(false); // オブジェクトを非アクティブにする
         // _speed = _speed * 0.01f;
         _isRotation = true;
     }
@@ -76,11 +71,31 @@ public class EmaMove : MonoBehaviour
     /// </summary>
     private void Rotation()
     {
+        CheckIsRight();
         _pos = _center; // 中心を基準に計算
         // _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 150f; // x軸方向の楕円運動
         // _pos.y += Mathf.Cos((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 50f; // y軸方向の楕円運動
         _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed)) * 150f; // x軸方向の楕円運動
         _pos.y += Mathf.Cos(Time.time * _speed) * 80f; // y軸方向の楕円運動
         transform.position = _pos;
+        if(_pos.y < -30)
+        {
+            _emaQueue.EnQueue(_ema.GetId(), _isOddNumber); // キューから削除
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void CheckIsRight()
+    {
+        if(_ema.GetIsRight())
+        {
+            _center = new Vector3(-200, 0, 0);
+            _rotateDirection = -1;
+        }
+        else
+        {
+            _center = new Vector3(200, 0, 0);
+            _rotateDirection = 1;
+        }
     }
 }
