@@ -15,7 +15,7 @@ public class ActionCableClient : MonoBehaviour
     private string flowerUrl = null;
     private string nameUrl = null;
     private string wishUrl = null;
-    [SerializeField] private GameObject _flowerCreator;
+    [SerializeField] private GameObject _emaCreator;
     private bool _isFlowerInfoUpdated = false;
 
 
@@ -73,15 +73,6 @@ public class ActionCableClient : MonoBehaviour
                 Debug.Log("nameUrl: " + nameUrl);
                 Debug.Log("wishUrl: " + wishUrl);
                 Debug.Log("上の情報から花を作る");
-
-                try
-                {
-                    Debug.Log(_flowerCreator.GetComponent<SampleFlowerCreator>());
-                }
-                catch (Exception ee)
-                {
-                    Debug.Log(ee);
-                }
             }
         };
 
@@ -102,10 +93,10 @@ public class ActionCableClient : MonoBehaviour
     {
         if (_isFlowerInfoUpdated)
         {
-            if (_flowerCreator != null)
+            if (_emaCreator != null)
             {
-                // _flowerCreator.GetComponent<SampleFlowerCreator>().SetFlowerInfo(flowerUrl, nameUrl, wishUrl);
-                // Debug.Log("花情報をセットしました！");
+                _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
+                Debug.Log("花情報をセットしました！");
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット
         }

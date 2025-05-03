@@ -1,6 +1,7 @@
 using UnityEngine;
 public class InGame : MonoBehaviour
 {
+    [SerializeField] private GameObject _emaCreator;
     [SerializeField] private GameObject _creatorContoroller;
     [SerializeField] private FlowerStartAnimation _flowerStartAnimation;
     [SerializeField] private SampleFlowerCreator _flowerCreator;
@@ -15,37 +16,37 @@ public class InGame : MonoBehaviour
 
     void Start()
     {
-        
-        _creatorContoroller.GetComponent<CreateController>().ManualStart();
-        _flowerStartAnimation.ManualStart();
-        _flowerCreator.ManualStart();
-        _rebornLeftSide.ManualStart();
-        _rebornRightSide.ManualStart();
+        _emaCreator.GetComponent<EmaCreator>().ManualStart();
+        // _creatorContoroller.GetComponent<CreateController>().ManualStart();
+        // _flowerStartAnimation.ManualStart();
+        // _flowerCreator.ManualStart();
+        // _rebornLeftSide.ManualStart();
+        // _rebornRightSide.ManualStart();
 
-        _randNumLeftSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
-        _randNumRightSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+        // _randNumLeftSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+        // _randNumRightSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
     }
 
     void Update()
     {
-        _creatorContoroller.GetComponent<CreateController>().ManualUpdate();
-        _flowerCreator.ManualUpdate();
+        // _creatorContoroller.GetComponent<CreateController>().ManualUpdate();
+        // _flowerCreator.ManualUpdate();
 
-        if(_frameCounterLeftSide >= _randNumLeftSide * 0.001f)
-        {
-            _frameCounterLeftSide = 0;
-            _randNumLeftSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
-            _rebornLeftSide.Reborn();
-        }
+        // if(_frameCounterLeftSide >= _randNumLeftSide * 0.001f)
+        // {
+        //     _frameCounterLeftSide = 0;
+        //     _randNumLeftSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+        //     _rebornLeftSide.Reborn();
+        // }
 
-        if(_frameCounterRightSide >= _randNumRightSide * 0.001f)
-        {
-            _frameCounterRightSide = 0;
-            _randNumRightSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
-            _rebornRightSide.Reborn();
-        }
+        // if(_frameCounterRightSide >= _randNumRightSide * 0.001f)
+        // {
+        //     _frameCounterRightSide = 0;
+        //     _randNumRightSide = Random.Range(_animalBornFastestTime, _animalBornSlowestTime);
+        //     _rebornRightSide.Reborn();
+        // }
 
-        _frameCounterLeftSide += Time.deltaTime;
-        _frameCounterRightSide += Time.deltaTime;
+        // _frameCounterLeftSide += Time.deltaTime;
+        // _frameCounterRightSide += Time.deltaTime;
     }
 }
