@@ -42,9 +42,9 @@ public class CreateController : MonoBehaviour
 
     private void ShowPrefab(int index)
     {
-        Debug.Log(_creators[index].name);
         try
         {
+            Debug.Log(_creators[index].name);
             _creators[index].GetComponent<Creator>().Create();
         }
         catch (System.Exception e)
