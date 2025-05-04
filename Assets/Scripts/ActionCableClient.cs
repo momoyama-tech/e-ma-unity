@@ -18,6 +18,7 @@ public class ActionCableClient : MonoBehaviour
     private string wishUrl = null;
     [SerializeField] private GameObject _emaCreator;
     private bool _isFlowerInfoUpdated = false;
+    private bool _isNew = false;
 
 
     [Serializable]
@@ -60,20 +61,33 @@ public class ActionCableClient : MonoBehaviour
             else if ((String)wsMessageJson["type"] == "confirm_subscription")
             {
                 // Debug.Log("this message is confirm_subscription, so  through");
+            }else if ((String)wsMessageJson["type"] == "welcome")
+            {
+                // Debug.Log("this message is confirm_subscription, so  through");
             }
             else
             {
-                // Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
-                // Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
-                // Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
+                Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
+                Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
+                Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
                 flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
                 nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
                 wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
                 _isFlowerInfoUpdated = true;
-                Debug.Log("flowerUrl: " + flowerUrl);
-                Debug.Log("nameUrl: " + nameUrl);
-                Debug.Log("wishUrl: " + wishUrl);
-                Debug.Log("上の情報から花を作る");
+                if ((string)wsMessageJson["message"]["message"] == "new")
+                {
+                    Debug.Log("新しい画像が送られてきたので_isNew = true");
+                    _isNew = true;
+                }
+                else if ((string)wsMessageJson["message"]["message"] == "old")
+                {
+                    Debug.Log("古い画像が送られてきたので_isNew = false");
+                    _isNew = false;
+                }
+                else
+                {
+                    Debug.Log("そもそも区別できていない");
+                }
             }
         };
 
@@ -96,9 +110,16 @@ public class ActionCableClient : MonoBehaviour
         {
             if (_emaCreator != null)
             {
-                // _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
-                _emaCreator.GetComponent<EmaCreator>().RebornEma(flowerUrl, nameUrl, wishUrl);
-                Debug.Log("花情報をセットしました！");
+                if (_isNew)
+                {
+                    Debug.Log("新しい画像をセット");
+                    _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
+                }
+                else
+                {
+                    _emaCreator.GetComponent<EmaCreator>().RebornEma(flowerUrl, nameUrl, wishUrl);
+                }
+                // Debug.Log("花情報をセットしました！");
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット
         }
