@@ -72,8 +72,10 @@ public class FlowerMove : MonoBehaviour
         Debugger.Log((_endPosX / _speed).ToString());
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
-        _speed = _speed * 0.01f;
-        _isRotation = true;
+        Destroy(gameObject);
+
+        // _speed = _speed * 0.01f;
+        // _isRotation = true;
     }
 
     /// <summary>

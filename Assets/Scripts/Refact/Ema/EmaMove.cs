@@ -75,6 +75,8 @@ public class EmaMove : MonoBehaviour
     private async UniTask Move()
     {
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
+        Destroy(gameObject);
+
         _emaQueue.EnQueue(_ema.GetId(), !_isOddNumber); // キューに追加
         gameObject.SetActive(false); // オブジェクトを非アクティブにする
         // _speed = _speed * 0.01f;

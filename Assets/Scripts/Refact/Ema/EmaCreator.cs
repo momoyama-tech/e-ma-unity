@@ -48,7 +48,7 @@ public class EmaCreator : MonoBehaviour
         var emaObj = Instantiate(_emaPrefab, gameObject.transform);
 
         // SpriteChanger のインスタンスを複製して初期化
-        var spriteChangerInstance = Instantiate(_spriteChanger);
+        var spriteChangerInstance = emaObj.AddComponent<SpriteChanger>();
         await spriteChangerInstance.Initialize(flowerUrl, nameUrl, wishUrl);
 
         // スプライトを設定
