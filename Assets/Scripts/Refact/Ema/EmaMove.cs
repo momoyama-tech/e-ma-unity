@@ -77,13 +77,13 @@ public class EmaMove : MonoBehaviour
 
     /// <summary>
     /// 転生後の回転移動
-    /// </summary>
+    /// </summary
     private void Rotation()
     {
         CheckIsRight();
         _pos = _center; // 中心を基準に計算
         _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed * 0.01f) - (gameObject.GetComponent<Ema>().GetId() / 26f) * 59.4f) * 150f; // x軸方向の楕円運動
-        _pos.y += Mathf.Cos((Time.time * _speed * 0.01f) - (gameObject.GetComponent<Ema>().GetId() / 26f) * 59.4f) * 50f; // y軸方向の楕円運動
+        _pos.y += Mathf.Cos((Time.time * _speed * 0.01f) - (gameObject.GetComponent<Ema>().GetId() / 26f) * 59.4f) * 40f; // y軸方向の楕円運動
         transform.position = _pos;
         if(_pos.y < -30)
         {
@@ -102,12 +102,12 @@ public class EmaMove : MonoBehaviour
     {
         if(_ema.GetIsRight())
         {
-            _center = new Vector3(-200, 0, 0);
+            _center = new Vector3(-200, -10, 0);
             _rotateDirection = -1;
         }
         else
         {
-            _center = new Vector3(200, 0, 0);
+            _center = new Vector3(200, -10, 0);
             _rotateDirection = 1;
         }
     }

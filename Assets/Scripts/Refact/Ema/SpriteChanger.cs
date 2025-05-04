@@ -25,8 +25,21 @@ public class SpriteChanger : MonoBehaviour
     private async UniTask SetFlowerInfo(string flowerUrl)
     {
         // flowerの画像を_urlから取得して設定する
+        if (string.IsNullOrEmpty(flowerUrl))
+        {
+            Debug.LogError("SetFlowerInfo に渡された URL が null または空です。");
+            return;
+        }
+        Debug.Log("ダウンロード対象のURL: " + flowerUrl);
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(flowerUrl);
         await www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("画像のダウンロードに失敗しました: " + www.error);
+            return;
+        }
+
         Texture2D tex = ((DownloadHandlerTexture)www.downloadHandler).texture;
         _flowerSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
     }

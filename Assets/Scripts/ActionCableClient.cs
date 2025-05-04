@@ -53,41 +53,53 @@ public class ActionCableClient : MonoBehaviour
 
         ws.OnMessage += (sender, e) =>
         {
-            JObject wsMessageJson = JObject.Parse(e.Data);
-            if ((String)wsMessageJson["type"] == "ping")
+            try
             {
-                // Debug.Log("this message is ping, so  through");
-            }
-            else if ((String)wsMessageJson["type"] == "confirm_subscription")
-            {
-                // Debug.Log("this message is confirm_subscription, so  through");
-            }else if ((String)wsMessageJson["type"] == "welcome")
-            {
-                // Debug.Log("this message is confirm_subscription, so  through");
-            }
-            else
-            {
-                Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
-                Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
-                Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
-                flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
-                nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
-                wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
-                _isFlowerInfoUpdated = true;
-                if ((string)wsMessageJson["message"]["message"] == "new")
+                JObject wsMessageJson = JObject.Parse(e.Data);
+                if ((string)wsMessageJson["type"] == "ping")
                 {
-                    Debug.Log("新しい画像が送られてきたので_isNew = true");
-                    _isNew = true;
+                    // pingメッセージは無視
                 }
-                else if ((string)wsMessageJson["message"]["message"] == "old")
+                else if ((string)wsMessageJson["type"] == "confirm_subscription")
                 {
-                    Debug.Log("古い画像が送られてきたので_isNew = false");
-                    _isNew = false;
+                    // サブスクリプション確認メッセージは無視
+                }
+                else if ((string)wsMessageJson["type"] == "welcome")
+                {
+                    // welcomeメッセージは無視
                 }
                 else
                 {
-                    Debug.Log("そもそも区別できていない");
+                    Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
+                    Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
+                    Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
+
+                    flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
+                    nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
+                    wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
+                    _isFlowerInfoUpdated = true;
+
+                    string msgType = (string)wsMessageJson["message"]["message"];
+                    if (msgType == "new")
+                    {
+                        Debug.Log("新しい画像が送られてきたので_isNew = true");
+                        _isNew = true;
+                    }
+                    else if (msgType == "old")
+                    {
+                        Debug.Log("古い画像が送られてきたので_isNew = false");
+                        _isNew = false;
+                    }
+                    else
+                    {
+                        Debug.Log("そもそも区別できていない");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("WebSocket メッセージ処理中に例外が発生: " + ex.Message);
+                Debug.LogError("例外発生時の生データ: " + e.Data);
             }
         };
 
