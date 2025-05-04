@@ -45,7 +45,10 @@ public class EmaMove : MonoBehaviour
 
         Debugger.RefactLog("初期化終了");
 
-        await Move();
+        if(!_isRotation)
+        {
+            await Move();
+        }
 
         Debugger.RefactLog("移動完了03");
     }
@@ -62,11 +65,11 @@ public class EmaMove : MonoBehaviour
         }
 
         // デバッグ用
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            _emaQueue.DeQueue(true);
-            gameObject.SetActive(true);
-        }
+        // if(Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     _emaQueue.DeQueue(true);
+        //     gameObject.SetActive(true);
+        // }
     }
 
     /// <summary>
@@ -77,10 +80,10 @@ public class EmaMove : MonoBehaviour
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
         Destroy(gameObject);
 
-        _emaQueue.EnQueue(_ema.GetId(), !_isOddNumber); // キューに追加
-        gameObject.SetActive(false); // オブジェクトを非アクティブにする
+        // _emaQueue.EnQueue(_ema.GetId(), !_isOddNumber); // キューに追加
+        // gameObject.SetActive(false); // オブジェクトを非アクティブにする
         // _speed = _speed * 0.01f;
-        _isRotation = true;
+        // _isRotation = true;
     }
 
     /// <summary>
@@ -97,8 +100,10 @@ public class EmaMove : MonoBehaviour
         transform.position = _pos;
         if(_pos.y < -30)
         {
-            _emaQueue.EnQueue(_ema.GetId(), _isOddNumber); // キューから削除
-            gameObject.SetActive(false);
+            // _emaQueue.EnQueue(_ema.GetId(), _isOddNumber); // キューから削除
+            // gameObject.SetActive(false);
+            Debugger.RefactLog("絵馬がy=-30以下になったので削除");
+            // Destroy(gameObject);
         }
     }
 

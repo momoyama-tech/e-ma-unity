@@ -18,8 +18,8 @@ public class InGame : MonoBehaviour
     {
         _emaCreator.GetComponent<EmaCreator>().ManualStart();
         _creatorContoroller.GetComponent<CreateController>().ManualStart();
-        _flowerStartAnimation.ManualStart();
-        _flowerCreator.ManualStart();
+        // _flowerStartAnimation.ManualStart();
+        // _flowerCreator.ManualStart();
         _rebornLeftSide.ManualStart();
         _rebornRightSide.ManualStart();
 
@@ -31,7 +31,7 @@ public class InGame : MonoBehaviour
     {
         _emaCreator.GetComponent<EmaCreator>().ManualUpdate();
         _creatorContoroller.GetComponent<CreateController>().ManualUpdate();
-        _flowerCreator.ManualUpdate();
+        // _flowerCreator.ManualUpdate();
 
         if(_frameCounterLeftSide >= _randNumLeftSide * 0.001f)
         {
