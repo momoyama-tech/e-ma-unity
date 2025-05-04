@@ -69,6 +69,6 @@ public class MoveManager : MonoBehaviour
         }
         
         await gameObject.transform.DOScale(new Vector3(0, 0, 0), 1.5f).SetEase(Ease.InBack).AsyncWaitForCompletion();
-        this.gameObject.SetActive(false);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }
