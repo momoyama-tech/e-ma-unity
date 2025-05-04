@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetPrefab: {fileID: 3967483294008648159, guid: 7fbd6f68eb0d342df9dbb484021268a8, type: 3}
-  _createMaxRangeX: 400
-  _createMinRangeX: -400
-  _createMaxRangeY: 60
-  _createMinRangeY: -60
-  _createMaxRangeZ: -20
-  _createMinRangeZ: -300
+  _createMaxRangeX: 0
+  _createMinRangeX: 0
+  _createMaxRangeY: -100
+  _createMinRangeY: -100
+  _createMaxRangeZ: 0
+  _createMinRangeZ: 0

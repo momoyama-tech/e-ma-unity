@@ -54,7 +54,6 @@ public class MoveManager : MonoBehaviour
         // 目的地に到達したら消滅
         Disable();    
     }
-
     private async UniTask Disable()
     {
         // 目的地に到達したら消滅
