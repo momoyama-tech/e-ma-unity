@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 public class FlowerMove : MonoBehaviour
 {
     [SerializeField] private float _speed; // 移動速度
-    private float _endPosX = 400.0f; // 端の座標
+    private float _endPosX = 350.0f; // 端の座標
     private float _centerPosX = 50.0f; // 中央の座標
     private bool _isOddNumber = false;
     private int _rotateDirection = 1; // 回転方向
@@ -72,8 +72,10 @@ public class FlowerMove : MonoBehaviour
         Debugger.Log((_endPosX / _speed).ToString());
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
-        _speed = _speed * 0.01f;
-        _isRotation = true;
+        Destroy(gameObject);
+
+        // _speed = _speed * 0.01f;
+        // _isRotation = true;
     }
 
     /// <summary>

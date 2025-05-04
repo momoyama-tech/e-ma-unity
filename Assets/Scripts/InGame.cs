@@ -1,7 +1,7 @@
 using UnityEngine;
 public class InGame : MonoBehaviour
 {
-    [SerializeField] private GameObject _effectCreateContoroller;
+    [SerializeField] private GameObject _emaCreator;
     [SerializeField] private GameObject _creatorContoroller;
     [SerializeField] private FlowerStartAnimation _flowerStartAnimation;
     [SerializeField] private SampleFlowerCreator _flowerCreator;
@@ -16,10 +16,10 @@ public class InGame : MonoBehaviour
 
     void Start()
     {
-        _effectCreateContoroller.GetComponent<EffectCreateController>().ManualStart();
+        _emaCreator.GetComponent<EmaCreator>().ManualStart();
         _creatorContoroller.GetComponent<CreateController>().ManualStart();
-        _flowerStartAnimation.ManualStart();
-        _flowerCreator.ManualStart();
+        // _flowerStartAnimation.ManualStart();
+        // _flowerCreator.ManualStart();
         _rebornLeftSide.ManualStart();
         _rebornRightSide.ManualStart();
 
@@ -29,9 +29,9 @@ public class InGame : MonoBehaviour
 
     void Update()
     {
-        _effectCreateContoroller.GetComponent<EffectCreateController>().ManualUpdate();
+        _emaCreator.GetComponent<EmaCreator>().ManualUpdate();
         _creatorContoroller.GetComponent<CreateController>().ManualUpdate();
-        _flowerCreator.ManualUpdate();
+        // _flowerCreator.ManualUpdate();
 
         if(_frameCounterLeftSide >= _randNumLeftSide * 0.001f)
         {

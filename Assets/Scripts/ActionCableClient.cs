@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 public class ActionCableClient : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class ActionCableClient : MonoBehaviour
     private string flowerUrl = null;
     private string nameUrl = null;
     private string wishUrl = null;
-    [SerializeField] private GameObject _flowerCreator;
+    [SerializeField] private GameObject _emaCreator;
     private bool _isFlowerInfoUpdated = false;
+    private bool _isNew = false;
 
 
     [Serializable]
@@ -51,37 +53,53 @@ public class ActionCableClient : MonoBehaviour
 
         ws.OnMessage += (sender, e) =>
         {
-            JObject wsMessageJson = JObject.Parse(e.Data);
-            if ((String)wsMessageJson["type"] == "ping")
+            try
             {
-                // Debug.Log("this message is ping, so  through");
-            }
-            else if ((String)wsMessageJson["type"] == "confirm_subscription")
-            {
-                // Debug.Log("this message is confirm_subscription, so  through");
-            }
-            else
-            {
-                // Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
-                // Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
-                // Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
-                flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
-                nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
-                wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
-                _isFlowerInfoUpdated = true;
-                Debug.Log("flowerUrl: " + flowerUrl);
-                Debug.Log("nameUrl: " + nameUrl);
-                Debug.Log("wishUrl: " + wishUrl);
-                Debug.Log("上の情報から花を作る");
+                JObject wsMessageJson = JObject.Parse(e.Data);
+                if ((string)wsMessageJson["type"] == "ping")
+                {
+                    // pingメッセージは無視
+                }
+                else if ((string)wsMessageJson["type"] == "confirm_subscription")
+                {
+                    // サブスクリプション確認メッセージは無視
+                }
+                else if ((string)wsMessageJson["type"] == "welcome")
+                {
+                    // welcomeメッセージは無視
+                }
+                else
+                {
+                    Debug.Log(wsMessageJson["message"]);                 // 投稿通知のjson
+                    Debug.Log(wsMessageJson["message"]["message"]);      // 新しいイラストが投稿されました！
+                    Debug.Log(wsMessageJson["message"]["data"]["urls"]["illustration"]);  // 画像の url
 
-                try
-                {
-                    Debug.Log(_flowerCreator.GetComponent<SampleFlowerCreator>());
+                    flowerUrl = (string)wsMessageJson["message"]["data"]["urls"]["illustration"];
+                    nameUrl = (string)wsMessageJson["message"]["data"]["urls"]["name"];
+                    wishUrl = (string)wsMessageJson["message"]["data"]["urls"]["wish"];
+                    _isFlowerInfoUpdated = true;
+
+                    string msgType = (string)wsMessageJson["message"]["message"];
+                    if (msgType == "new")
+                    {
+                        Debug.Log("新しい画像が送られてきたので_isNew = true");
+                        _isNew = true;
+                    }
+                    else if (msgType == "old")
+                    {
+                        Debug.Log("古い画像が送られてきたので_isNew = false");
+                        _isNew = false;
+                    }
+                    else
+                    {
+                        Debug.Log("そもそも区別できていない");
+                    }
                 }
-                catch (Exception ee)
-                {
-                    Debug.Log(ee);
-                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("WebSocket メッセージ処理中に例外が発生: " + ex.Message);
+                Debug.LogError("例外発生時の生データ: " + e.Data);
             }
         };
 
@@ -98,14 +116,22 @@ public class ActionCableClient : MonoBehaviour
         ws.Connect();
     }
 
-    async Task Update()
+    async UniTask Update()
     {
         if (_isFlowerInfoUpdated)
         {
-            if (_flowerCreator != null)
+            if (_emaCreator != null)
             {
-                _flowerCreator.GetComponent<SampleFlowerCreator>().SetFlowerInfo(flowerUrl, nameUrl, wishUrl);
-                Debug.Log("花情報をセットしました！");
+                if (_isNew)
+                {
+                    Debug.Log("新しい画像をセット");
+                    _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
+                }
+                else
+                {
+                    _emaCreator.GetComponent<EmaCreator>().RebornEma(flowerUrl, nameUrl, wishUrl);
+                }
+                // Debug.Log("花情報をセットしました！");
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット
         }
