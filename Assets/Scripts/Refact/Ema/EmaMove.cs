@@ -82,10 +82,8 @@ public class EmaMove : MonoBehaviour
     {
         CheckIsRight();
         _pos = _center; // 中心を基準に計算
-        // _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 150f; // x軸方向の楕円運動
-        // _pos.y += Mathf.Cos((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 50f; // y軸方向の楕円運動
-        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed * 0.01f)) * 150f; // x軸方向の楕円運動
-        _pos.y += Mathf.Cos(Time.time * _speed * 0.01f) * 80f; // y軸方向の楕円運動
+        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed * 0.01f) - (gameObject.GetComponent<Ema>().GetId() / 26f) * 59.4f) * 150f; // x軸方向の楕円運動
+        _pos.y += Mathf.Cos((Time.time * _speed * 0.01f) - (gameObject.GetComponent<Ema>().GetId() / 26f) * 59.4f) * 50f; // y軸方向の楕円運動
         transform.position = _pos;
         if(_pos.y < -30)
         {
