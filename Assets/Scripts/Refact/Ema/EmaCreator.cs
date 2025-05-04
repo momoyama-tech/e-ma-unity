@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class EmaCreator : MonoBehaviour
 {
-    private int _id;// EmaのID、全てのEmaにユニークなIDを付与するために使用
+    private int _newEmaID;// EmaのID、全てのEmaにユニークなIDを付与するために使用
+    private int _rebornEmaID;// EmaのID、再生時に使用
     private SpriteChanger _spriteChanger;
     [SerializeField] private GameObject _emaPrefab;
 
     public void ManualStart()
     {
-        _id = 0;
+        _newEmaID = 0;
+        _rebornEmaID = 0;
         _spriteChanger = GetComponent<SpriteChanger>();
         if (_spriteChanger == null)
         {
@@ -57,12 +59,42 @@ public class EmaCreator : MonoBehaviour
         emaObj.transform.Find("Wish").GetComponent<SpriteRenderer>().sprite = spriteChangerInstance.GetWishSprite();
 
         // Ema の初期化
-        emaObj.GetComponent<Ema>().Initialize(_id, spriteChangerInstance.GetFlowerSprite(), spriteChangerInstance.GetNameSprite(), spriteChangerInstance.GetWishSprite());
+        emaObj.GetComponent<Ema>().Initialize(_newEmaID, spriteChangerInstance.GetFlowerSprite(), spriteChangerInstance.GetNameSprite(), spriteChangerInstance.GetWishSprite());
 
         // EmaMove の初期化
-        await emaObj.GetComponent<EmaMove>().Initialize();
-        Debugger.RefactLog($"EmaMoveの初期化完了 for ID: {_id}");
+        await emaObj.GetComponent<EmaMove>().Initialize(false);
+        Debugger.RefactLog($"EmaMoveの初期化完了 for ID: {_newEmaID}");
 
-        _id++;
+        _newEmaID++;
+    }
+
+    public async UniTask RebornEma(string flowerUrl, string nameUrl, string wishUrl)
+    {
+        if (_emaPrefab == null)
+        {
+            Debugger.RefactLog("EmaPrefab is not assigned in the inspector.");
+            return;
+        }
+
+        // EmaPrefabをインスタンス化
+        var emaObj = Instantiate(_emaPrefab, gameObject.transform);
+
+        // SpriteChanger のインスタンスを複製して初期化
+        var spriteChangerInstance = emaObj.AddComponent<SpriteChanger>();
+        await spriteChangerInstance.Initialize(flowerUrl, nameUrl, wishUrl);
+
+        // スプライトを設定
+        emaObj.GetComponent<SpriteRenderer>().sprite = spriteChangerInstance.GetFlowerSprite();
+        emaObj.transform.Find("Name").GetComponent<SpriteRenderer>().sprite = spriteChangerInstance.GetNameSprite();
+        emaObj.transform.Find("Wish").GetComponent<SpriteRenderer>().sprite = spriteChangerInstance.GetWishSprite();
+
+        // Ema の初期化
+        emaObj.GetComponent<Ema>().Initialize(_rebornEmaID, spriteChangerInstance.GetFlowerSprite(), spriteChangerInstance.GetNameSprite(), spriteChangerInstance.GetWishSprite());
+
+        // EmaMove の初期化
+        await emaObj.GetComponent<EmaMove>().Initialize(true);
+        Debugger.RefactLog($"EmaMoveの初期化完了 for ID: {_rebornEmaID}");
+
+        _rebornEmaID++;
     }
 }

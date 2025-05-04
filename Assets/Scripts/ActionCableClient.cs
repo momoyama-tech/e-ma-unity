@@ -96,7 +96,8 @@ public class ActionCableClient : MonoBehaviour
         {
             if (_emaCreator != null)
             {
-                _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
+                // _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
+                _emaCreator.GetComponent<EmaCreator>().RebornEma(flowerUrl, nameUrl, wishUrl);
                 Debug.Log("花情報をセットしました！");
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット

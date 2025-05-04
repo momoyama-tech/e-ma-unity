@@ -16,8 +16,9 @@ public class EmaMove : MonoBehaviour
     private EmaQueue _emaQueue;
     private Ema _ema;
 
-    public async UniTask Initialize()
+    public async UniTask Initialize(bool isRotate)
     {
+        _isRotation = isRotate;
         Debugger.RefactLog("EmaMoveの初期化開始");
 
         // 移動時間を計算
@@ -63,13 +64,6 @@ public class EmaMove : MonoBehaviour
         {
             Rotation();
         }
-
-        // デバッグ用
-        // if(Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     _emaQueue.DeQueue(true);
-        //     gameObject.SetActive(true);
-        // }
     }
 
     /// <summary>
@@ -79,11 +73,6 @@ public class EmaMove : MonoBehaviour
     {
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
         Destroy(gameObject);
-
-        // _emaQueue.EnQueue(_ema.GetId(), !_isOddNumber); // キューに追加
-        // gameObject.SetActive(false); // オブジェクトを非アクティブにする
-        // _speed = _speed * 0.01f;
-        // _isRotation = true;
     }
 
     /// <summary>
@@ -95,8 +84,8 @@ public class EmaMove : MonoBehaviour
         _pos = _center; // 中心を基準に計算
         // _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 150f; // x軸方向の楕円運動
         // _pos.y += Mathf.Cos((Time.time * _speed) - (gameObject.GetComponent<SampleFlowerObj>().GetId() / 26f) * 59.4f) * 50f; // y軸方向の楕円運動
-        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed)) * 150f; // x軸方向の楕円運動
-        _pos.y += Mathf.Cos(Time.time * _speed) * 80f; // y軸方向の楕円運動
+        _pos.x += _rotateDirection * Mathf.Sin((Time.time * _speed * 0.01f)) * 150f; // x軸方向の楕円運動
+        _pos.y += Mathf.Cos(Time.time * _speed * 0.01f) * 80f; // y軸方向の楕円運動
         transform.position = _pos;
         if(_pos.y < -30)
         {
