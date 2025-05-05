@@ -49,6 +49,7 @@ public class ActionCableClient : MonoBehaviour
         {
             Debug.Log("WebSocket Open");
             SubscribeToChannel();
+            SetupEmas();
         };
 
         ws.OnMessage += (sender, e) =>
@@ -88,7 +89,6 @@ public class ActionCableClient : MonoBehaviour
                     else if (msgType == "old")
                     {
                         Debug.Log("古い画像が送られてきたので_isNew = false");
-                        _isNew = false;
                     }
                     else
                     {
@@ -127,11 +127,6 @@ public class ActionCableClient : MonoBehaviour
                     Debug.Log("新しい画像をセット");
                     _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
                 }
-                else
-                {
-                    _emaCreator.GetComponent<EmaCreator>().RebornEma(flowerUrl, nameUrl, wishUrl);
-                }
-                // Debug.Log("花情報をセットしました！");
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット
         }
@@ -156,6 +151,43 @@ public class ActionCableClient : MonoBehaviour
         ws.Send(subscriptionMessage);
         Debug.Log("Subscribed to " + channelName + " with Room ID: " + roomId);
     }
+
+    private async void SetupEmas()
+    {
+        Debug.Log("SetupEmas");
+
+        UnityWebRequest www = UnityWebRequest.Get("https://e-ma-rails-staging-986464278422.asia-northeast1.run.app/emas");
+        www.downloadHandler = new DownloadHandlerBuffer(); // 明示的に追加（なくても動くが推奨）
+        await www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("絵馬の直近一覧取得に失敗しました: " + www.error);
+            return;
+        }
+
+        try
+        {
+            JArray emasJsonArray = JArray.Parse(www.downloadHandler.text);
+
+            foreach (JObject ema in emasJsonArray)
+            {
+                int id = ema.Value<int?>("id") ?? -1;
+                string illustrationUrl = ema.Value<string>("illustration");
+                string nameUrl = ema.Value<string>("name");
+                string wishUrl = ema.Value<string>("wish");
+                Debug.Log($"絵馬ID: {id}, illustration: {illustrationUrl}, name: {nameUrl}, wish: {wishUrl}");
+                _emaCreator.GetComponent<EmaCreator>().RebornEma(illustrationUrl, nameUrl, wishUrl);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("JSONパース中にエラーが発生しました: " + e.Message);
+        }
+
+        Debug.Log("SetupEmas end");
+    }
+
 
     private void UnsubscribeFromChannel()
     {
