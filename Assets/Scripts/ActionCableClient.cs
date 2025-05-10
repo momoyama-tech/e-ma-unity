@@ -126,6 +126,7 @@ public class ActionCableClient : MonoBehaviour
                 {
                     Debug.Log("新しい画像をセット");
                     _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
+                    Debug.Log("lkjhg--------");
                 }
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット
@@ -176,6 +177,9 @@ public class ActionCableClient : MonoBehaviour
                 string illustrationUrl = ema.Value<string>("illustration");
                 string nameUrl = ema.Value<string>("name");
                 string wishUrl = ema.Value<string>("wish");
+                if (illustrationUrl == "") {
+                    continue;
+                }
                 Debug.Log($"絵馬ID: {id}, illustration: {illustrationUrl}, name: {nameUrl}, wish: {wishUrl}");
                 _emaCreator.GetComponent<EmaCreator>().RebornEma(illustrationUrl, nameUrl, wishUrl);
             }
