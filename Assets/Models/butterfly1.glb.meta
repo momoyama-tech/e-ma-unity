@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: d96944d9a28b64e42b8203f57e7e3d3e
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SVGMat.005
+    second: {fileID: 2100000, guid: 7938f27a0dcc3d3458e36151116d7644, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
