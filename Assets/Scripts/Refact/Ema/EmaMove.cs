@@ -26,10 +26,12 @@ public class EmaMove : MonoBehaviour
 
         // 親コンポーネントを取得
         _emaQueue = this.gameObject.transform.parent.GetComponent<EmaQueue>();
-
         _ema = gameObject.GetComponent<Ema>();
 
         // idが偶数かどうかを判定
+         /*
+          *  以下のコードは、データベースに保存されているidを元にしているので、データが削除された場合などでidが偏る可能性が高くなっています
+          *  なので、50%の確率で分けれるように応急処置をしています
         if(_ema.GetId() % 2 == 0)
         {
             _isOddNumber = true;
@@ -38,10 +40,13 @@ public class EmaMove : MonoBehaviour
         {
             _isOddNumber = false;
         }
+         */
+
+        _isOddNumber = UnityEngine.Random.value > 0.5f;
 
         // 奇数番目なら左から右にすすむ
         // 偶数番目なら右から左に進む
-        if(_isOddNumber)
+        if (_isOddNumber)
             _endPosX *= -1;
 
         Debugger.RefactLog("初期化終了");
