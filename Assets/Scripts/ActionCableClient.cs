@@ -125,6 +125,7 @@ public class ActionCableClient : MonoBehaviour
                 if (_isNew)
                 {
                     Debug.Log("新しい画像をセット");
+                    _isNew = false; // 処理終わったのでリセット
                     _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
                 }
             }

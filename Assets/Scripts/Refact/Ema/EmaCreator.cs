@@ -7,7 +7,9 @@ public class EmaCreator : MonoBehaviour
     private int _newEmaID;// EmaのID、全てのEmaにユニークなIDを付与するために使用
     private int _rebornEmaID;// EmaのID、再生時に使用
     private SpriteChanger _spriteChanger;
+    [SerializeField] private int _maxEmaCount = 22; // Emaの最大数
     [SerializeField] private GameObject _emaPrefab;
+    private GameObject[] _emaObjects;
 
     public void ManualStart()
     {
@@ -96,5 +98,62 @@ public class EmaCreator : MonoBehaviour
         Debugger.RefactLog($"EmaMoveの初期化完了 for ID: {_rebornEmaID}");
 
         _rebornEmaID++;
+    }
+
+    public async UniTask RebornEma(Sprite flowerSprite, Sprite nameSprite, Sprite wishSprite)
+    {
+        if (_emaPrefab == null)
+        {
+            Debugger.RefactLog("EmaPrefab is not assigned in the inspector.");
+            return;
+        }
+
+        DecideOverrideID();
+
+        // EmaPrefabをインスタンス化
+        var emaObj = Instantiate(_emaPrefab, gameObject.transform);
+
+        // スプライトを設定
+        emaObj.GetComponent<SpriteRenderer>().sprite = flowerSprite;
+        emaObj.transform.Find("Name").GetComponent<SpriteRenderer>().sprite = nameSprite;
+        emaObj.transform.Find("Wish").GetComponent<SpriteRenderer>().sprite = wishSprite;
+
+        // Ema の初期化
+        emaObj.GetComponent<Ema>().Initialize(_rebornEmaID, flowerSprite, nameSprite, wishSprite);
+
+        // EmaMove の初期化
+        await emaObj.GetComponent<EmaMove>().Initialize(true);
+        Debugger.RefactLog($"EmaMoveの初期化完了 for ID: {_rebornEmaID}");
+
+        _rebornEmaID++;
+    }
+
+    /// <summary>
+    /// 上書きする絵馬のIDを決定するメソッド
+    /// _rebornEmaIDの値を確認して、上書きするIDを決定
+    /// _rebornEmaIDが上限を超えた場合、0に戻す
+    /// 上限を超えていなければ、_currentEmaIDに_rebornEmaIDを代入
+    /// 上限を超えた場合、_currentEmaIDに0を代入
+    /// このオブジェクトの子コンポーネントであるEmaオブジェクトを全探索し、_currentEmaIDと一致するIDを持つEmaオブジェクトを探す
+    /// 一致するEmaオブジェクトが見つかった場合、そのEmaオブジェクトのSpriteを上書きする
+    /// </summary>
+    private void DecideOverrideID()
+    {
+        if (_rebornEmaID >= _maxEmaCount)
+        {
+            Debugger.RefactLog($"上書きする絵馬のIDが上限を超えました: {_rebornEmaID}");
+            _rebornEmaID = 0;
+        }
+
+        foreach (var ema in GetComponentsInChildren<Ema>())
+        {
+            if (ema.GetId() == _rebornEmaID)
+            {
+                Debugger.RefactLog($"上書きする絵馬のIDが見つかりました: {_rebornEmaID}");
+                Destroy(ema.gameObject);
+                return;
+            }
+        }
+        Debugger.RefactLog($"上書きする絵馬のIDが見つかりませんでした: {_rebornEmaID}");
     }
 }
