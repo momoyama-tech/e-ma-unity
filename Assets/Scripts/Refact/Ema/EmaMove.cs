@@ -25,7 +25,6 @@ public class EmaMove : MonoBehaviour
 
         // 親コンポーネントを取得
         _ema = gameObject.GetComponent<Ema>();
-
         _isOddNumber = UnityEngine.Random.value > 0.5f;
 
         // 奇数番目なら左から右にすすむ

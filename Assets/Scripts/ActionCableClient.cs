@@ -88,7 +88,7 @@ public class ActionCableClient : MonoBehaviour
                     }
                     else if (msgType == "old")
                     {
-                        // Debug.Log("古い画像が送られてきたので_isNew = false");
+                        Debug.Log("古い画像が送られてきたので_isNew = false");
                     }
                     else
                     {
@@ -127,10 +127,6 @@ public class ActionCableClient : MonoBehaviour
                     Debug.Log("新しい画像をセット");
                     _isNew = false; // 処理終わったのでリセット
                     _emaCreator.GetComponent<EmaCreator>().CreateEma(flowerUrl, nameUrl, wishUrl);
-                }
-                else
-                {
-                    Debug.Log("これは古い画像です");
                 }
             }
             _isFlowerInfoUpdated = false; // 処理終わったのでリセット
