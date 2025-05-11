@@ -1,45 +1,49 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
-    [Header("SerialCommunication ƒRƒ“ƒ|[ƒlƒ“ƒg")]
-    public SerialCommunication serialComm;   // Œã‚Å Inspector ‚Å•R‚Ã‚¯‚Ü‚·
+    [Header("SerialCommunication ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ")]
+    public SerialCommunication serialComm;   // å¾Œã§ Inspector ã§ç´ã¥ã‘ã¾ã™
 
-    [Header("ƒLƒ…[ƒu¶¬İ’è")]
-    public GameObject cubePrefab;          // ì‚Á‚½ƒLƒ…[ƒuƒvƒŒƒnƒu
-    public Vector3[] spawnPositions;       // o‚µ‚½‚¢êŠ‚ğ”z—ñ‚Å
-    public float launchForce = 5f;         // ã‚É”ò‚Î‚·—Í
+    [Header("ã‚­ãƒ¥ãƒ¼ãƒ–ç”Ÿæˆè¨­å®š")]
+    public GameObject cubePrefab;          // ä½œã£ãŸã‚­ãƒ¥ãƒ¼ãƒ–ãƒ—ãƒ¬ãƒãƒ–
+    public Vector3[] spawnPositions;       // å‡ºã—ãŸã„å ´æ‰€ã‚’é…åˆ—ã§
+    public float launchForce = 5f;         // ä¸Šã«é£›ã°ã™åŠ›
 
-    private GameObject[] spawnedCubes;     // ¶¬Ï‚İ‚ÌƒLƒ…[ƒu‚ğŠo‚¦‚é”z—ñ
+    private GameObject[] spawnedCubes;     // ç”Ÿæˆæ¸ˆã¿ã®ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’è¦šãˆã‚‹é…åˆ—
+
+    public GameObject[] cubePrefabs;  // è¤‡æ•°ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç™»éŒ²å¯èƒ½ã«
+
+    private long n = 0;
 
     void Start()
     {
-        // spawnPositions ‚Ì’·‚³‚¾‚¯”z—ñ‚ğì‚èAÅ‰‚Í‘S•” null
+        // spawnPositions ã®é•·ã•ã ã‘é…åˆ—ã‚’ä½œã‚Šã€æœ€åˆã¯å…¨éƒ¨ null
         spawnedCubes = new GameObject[spawnPositions.Length];
         for (int i = 0; i < spawnedCubes.Length; i++)
             spawnedCubes[i] = null;
 
-        // serialComm ‚ªƒZƒbƒg‚³‚ê‚Ä‚¢‚È‚¢‚Æ“®‚©‚È‚¢‚Ì‚Åƒ`ƒFƒbƒN
+        // serialComm ãŒã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ãªã„ã¨å‹•ã‹ãªã„ã®ã§ãƒã‚§ãƒƒã‚¯
         if (serialComm == null)
         {
-            Debug.LogError("CubeSpawner ‚Ì serialComm ‚É SerialCommunication ‚ğƒZƒbƒg‚µ‚Ä‚­‚¾‚³‚¢I");
+            Debug.LogError("CubeSpawner ã® serialComm ã« SerialCommunication ã‚’ã‚»ãƒƒãƒˆã—ã¦ãã ã•ã„ï¼");
             enabled = false;
         }
     }
 
     void Update()
     {
-        // Še i ‚É‚Â‚¢‚Ä Getinfo ‚ğŒÄ‚Ño‚µ
+       //å„ i ã«ã¤ã„ã¦ Getinfo ã‚’å‘¼ã³å‡ºã—
         for (int i = 0; i < spawnPositions.Length; i++)
         {
             int info = serialComm.Getinfo(i);
 
-            // ‡@ info == 1 && ‚Ü‚¾ƒLƒ…[ƒu‚ª‚È‚¢ ¨ ¶¬•”ò‚Î‚·
-            if (info == 1)//&& spawnedCubes[i] == null
+            // â‘  info == 1 && ã¾ã ã‚­ãƒ¥ãƒ¼ãƒ–ãŒãªã„ â†’ ç”Ÿæˆï¼†é£›ã°ã™
+            if (info == 1 && n % 5 == 0)//&& spawnedCubes[i] == null
             {
                 SpawnAndLaunchCube(i);
             }
-            // ‡A info == 0 && ƒLƒ…[ƒu‚ª‚ ‚é ¨ Á‚·
+            // â‘¡ info == 0 && ã‚­ãƒ¥ãƒ¼ãƒ–ãŒã‚ã‚‹ â†’ æ¶ˆã™
             else if (info == 0 && spawnedCubes[i] != null)
             {
                 Destroy(spawnedCubes[i]);
@@ -47,24 +51,51 @@ public class CubeSpawner : MonoBehaviour
             }
         }
 
-        if(gameObject.transform.position.y == -60)
-        {
-            Debug.Log("ƒIƒuƒWƒFƒNƒg‚Ìíœ" + gameObject.name);
-            Destroy(gameObject);
-        }
+        //if (Input.GetKey(KeyCode.Space) )
+        //{
+        //    SpawnAndLaunchCube(14);
+        //}
+        n = n + 1;
+        if (n > 1000) n = 0;
     }
 
-    // ƒLƒ…[ƒu‚ğ¶¬‚µ‚ÄãŒü‚«‚ÉƒCƒ“ƒpƒ‹ƒX‚ğ—^‚¦‚é
+    // ã‚­ãƒ¥ãƒ¼ãƒ–ã‚’ç”Ÿæˆã—ã¦ä¸Šå‘ãã«ã‚¤ãƒ³ãƒ‘ãƒ«ã‚¹ã‚’ä¸ãˆã‚‹
     private void SpawnAndLaunchCube(int index)
     {
-        Vector3 pos = spawnPositions[index];
-        GameObject cube = Instantiate(cubePrefab, pos, Quaternion.identity);
+        Vector3 basePos = spawnPositions[index];
+        float offsetX = Random.Range(-10f, 10f);
+        Vector3 pos = new Vector3(basePos.x + offsetX, basePos.y - 60, basePos.z - 50);
+
+        // æ”¾å°„æ–¹å‘ã‚’è¨ˆç®—
+        Vector3 direction = (Vector3.up + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-0.5f, 0.5f))).normalized;
+
+        // å›è»¢ã®è¨­å®šï¼ˆæ–¹å‘ + ä»»æ„ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆï¼‰
+        Vector3 baseEuler = Quaternion.LookRotation(direction).eulerAngles;
+        // æ¡ä»¶ã«å¿œã˜ã¦å›è»¢ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’å¤‰æ›´
+        Vector3 offsetEuler;
+        if (direction.x < 0f)
+            offsetEuler = new Vector3(0f, 0f, 90f);  // å·¦ã«é£›ã¶ã¨ã
+        else
+            offsetEuler = new Vector3(0f, 0f, -90f);   // å³ã«é£›ã¶ã¨ã
+        Quaternion rotation = Quaternion.Euler(baseEuler + offsetEuler);
+
+        // ğŸ”½ ãƒ—ãƒ¬ãƒãƒ–ã‚’ãƒ©ãƒ³ãƒ€ãƒ é¸æŠ
+        if (cubePrefabs == null || cubePrefabs.Length == 0)
+        {
+            Debug.LogWarning("ãƒ—ãƒ¬ãƒãƒ–é…åˆ—ãŒç©ºã§ã™ï¼");
+            return;
+        }
+
+        GameObject selectedPrefab = cubePrefabs[Random.Range(0, cubePrefabs.Length)];
+        GameObject cube = Instantiate(selectedPrefab, pos, rotation);
         spawnedCubes[index] = cube;
 
         Rigidbody rb = cube.GetComponent<Rigidbody>();
         if (rb != null)
-            rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
+            rb.AddForce(direction * launchForce, ForceMode.Impulse);
         else
-            Debug.LogWarning("cubePrefab ‚É Rigidbody ‚ª‚ ‚è‚Ü‚¹‚ñI");
+            Debug.LogWarning("ãƒ—ãƒ¬ãƒãƒ–ã« Rigidbody ãŒã‚ã‚Šã¾ã›ã‚“ï¼");
+
+        Destroy(cube, 10f);
     }
 }
