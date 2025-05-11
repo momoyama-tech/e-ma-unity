@@ -13,7 +13,6 @@ public class EmaMove : MonoBehaviour
     private Vector3 _pos; // 開始位置
     private bool _isRotation = false; // 回転フラグ
     private Vector3 _center; // 中心座標
-    private EmaQueue _emaQueue;
     private Ema _ema;
 
     public async UniTask Initialize(bool isRotate)
@@ -25,7 +24,6 @@ public class EmaMove : MonoBehaviour
         _time = Math.Abs(_endPosX / _speed);
 
         // 親コンポーネントを取得
-        _emaQueue = this.gameObject.transform.parent.GetComponent<EmaQueue>();
         _ema = gameObject.GetComponent<Ema>();
 
         // idが偶数かどうかを判定
@@ -77,6 +75,10 @@ public class EmaMove : MonoBehaviour
     private async UniTask Move()
     {
         await gameObject.transform.DOMoveX(_endPosX, _time).SetEase(Ease.Linear).AsyncWaitForCompletion();
+
+        // 輪廻するオブジェクトに上書き設定する
+        // 親コンポーネントが持つEmaCreator.csのRebornEmaメソッドを呼び出す
+        gameObject.transform.parent.GetComponent<EmaCreator>().RebornEma(_ema.GetFlowerSprite(), _ema.GetNameSprite(), _ema.GetWishSprite());
         Destroy(gameObject);
     }
 
