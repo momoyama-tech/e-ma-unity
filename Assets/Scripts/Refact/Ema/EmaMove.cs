@@ -26,20 +26,6 @@ public class EmaMove : MonoBehaviour
         // 親コンポーネントを取得
         _ema = gameObject.GetComponent<Ema>();
 
-        // idが偶数かどうかを判定
-         /*
-          *  以下のコードは、データベースに保存されているidを元にしているので、データが削除された場合などでidが偏る可能性が高くなっています
-          *  なので、50%の確率で分けれるように応急処置をしています
-        if(_ema.GetId() % 2 == 0)
-        {
-            _isOddNumber = true;
-        }
-        else
-        {
-            _isOddNumber = false;
-        }
-         */
-
         _isOddNumber = UnityEngine.Random.value > 0.5f;
 
         // 奇数番目なら左から右にすすむ

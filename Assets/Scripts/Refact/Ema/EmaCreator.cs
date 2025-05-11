@@ -78,8 +78,6 @@ public class EmaCreator : MonoBehaviour
             return;
         }
 
-        DecideOverrideID();
-
         // EmaPrefabをインスタンス化
         var emaObj = Instantiate(_emaPrefab, gameObject.transform);
 
@@ -152,6 +150,7 @@ public class EmaCreator : MonoBehaviour
             if (ema.GetId() == _rebornEmaID)
             {
                 Debugger.RefactLog($"上書きする絵馬のIDが見つかりました: {_rebornEmaID}");
+                Destroy(ema.gameObject);
                 return;
             }
         }
