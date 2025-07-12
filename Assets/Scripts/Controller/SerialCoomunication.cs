@@ -6,8 +6,8 @@ public class SerialCommunication : MonoBehaviour
 {
     private SerialPort serialPort;
     private const string PortName = "COM3";
-    private const int BaudRate = 115200;
-    private const int DataLength = 28;
+    private const int BaudRate = 9600;
+    private const int DataLength = 6;
     private const int FadeIncrement = 1;
     private const int FadeDecrement = 3;
     private const int MaxIntensity = 250;
@@ -26,7 +26,7 @@ public class SerialCommunication : MonoBehaviour
     private float sigma = 0.5f;
     private int dataIndex = 0;
 
-    // ƒ‰ƒ“ƒ_ƒ€¶¬ŠíiƒCƒ“ƒXƒ^ƒ“ƒX‚ğg‚¢‰ñ‚·j
+    // ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ñ‚·j
     private System.Random random = new System.Random();
 
     void Start()
@@ -53,11 +53,11 @@ public class SerialCommunication : MonoBehaviour
                 ReadTimeout = 1000
             };
             serialPort.Open();
-            Debug.Log($"ƒVƒŠƒAƒ‹ƒ|[ƒg‚ğŠJ‚«‚Ü‚µ‚½: {PortName}");
+            Debug.Log($"ï¿½Vï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½: {PortName}");
         }
         catch (Exception ex)
         {
-            Debug.LogError($"ƒVƒŠƒAƒ‹ƒ|[ƒgÚ‘±ƒGƒ‰[: {ex.Message}");
+            Debug.LogError($"ï¿½Vï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½Ú‘ï¿½ï¿½Gï¿½ï¿½ï¿½[: {ex.Message}");
         }
     }
 
@@ -91,11 +91,11 @@ public class SerialCommunication : MonoBehaviour
         }
         catch (TimeoutException)
         {
-            Debug.LogWarning("ƒf[ƒ^óMƒ^ƒCƒ€ƒAƒEƒg");
+            Debug.LogWarning("ï¿½fï¿½[ï¿½^ï¿½ï¿½Mï¿½^ï¿½Cï¿½ï¿½ï¿½Aï¿½Eï¿½g");
         }
         catch (Exception ex)
         {
-            Debug.LogError($"óMƒGƒ‰[: {ex.Message}");
+            Debug.LogError($"ï¿½ï¿½Mï¿½Gï¿½ï¿½ï¿½[: {ex.Message}");
         }
     }
 
@@ -107,7 +107,7 @@ public class SerialCommunication : MonoBehaviour
         }
     }
 
-    // “_–Å‚ğƒ‰ƒ“ƒ_ƒ€‚É“K—pi•Î‚è‚ğ–h‚®‚æ‚¤C³j
+    // ï¿½_ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½É“Kï¿½pï¿½iï¿½Î‚ï¿½ï¿½hï¿½ï¿½ï¿½æ‚¤ï¿½Cï¿½ï¿½ï¿½j
     private void ApplyRandomActivation(float probability)
     {
         if (l % 800 == 0)
@@ -148,7 +148,7 @@ public class SerialCommunication : MonoBehaviour
         if (l > 5000) l = 0;
     }
 
-    // ”z—ñ‚ğƒVƒƒƒbƒtƒ‹iFisher?YatesƒAƒ‹ƒSƒŠƒYƒ€j
+    // ï¿½zï¿½ï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½tï¿½ï¿½ï¿½iFisher?Yatesï¿½Aï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½j
     private void Shuffle(int[] array)
     {
         for (int i = array.Length - 1; i > 0; i--)
@@ -185,7 +185,7 @@ public class SerialCommunication : MonoBehaviour
                 ranintensity[i] = Mathf.Max(ranintensity[i] - FadeDecrement, MinIntensity);
             }
 
-            // ?? ƒ^ƒbƒ`‚È‚çÅ‘å250Aƒ‰ƒ“ƒ_ƒ€“_–Å‚È‚çÅ‘å125
+            // ?? ï¿½^ï¿½bï¿½`ï¿½È‚ï¿½Å‘ï¿½250ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½_ï¿½Å‚È‚ï¿½Å‘ï¿½125
             //int localMax = (intData[i] == 1) ? MaxIntensity : 10;
             float baseIntensity = Mathf.Min(MaxIntensity, touchDuration[i]);
 
@@ -220,7 +220,7 @@ public class SerialCommunication : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogError($"‘—MƒGƒ‰[: {ex.Message}");
+            Debug.LogError($"ï¿½ï¿½ï¿½Mï¿½Gï¿½ï¿½ï¿½[: {ex.Message}");
         }
     }
 
@@ -234,7 +234,7 @@ public class SerialCommunication : MonoBehaviour
         if (serialPort != null && serialPort.IsOpen)
         {
             serialPort.Close();
-            Debug.Log("ƒVƒŠƒAƒ‹ƒ|[ƒg‚ğ•Â‚¶‚Ü‚µ‚½");
+            Debug.Log("ï¿½Vï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½|ï¿½[ï¿½gï¿½ï¿½Â‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
         }
     }
 }
